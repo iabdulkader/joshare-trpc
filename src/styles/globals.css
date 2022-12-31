@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+
+  @layer components {
+    .drag {
+      @apply dark:bg-bg-dark bg-bg-light
+    }
+
+    .button{
+      @apply text-sm border border-bg-dark dark:border-bg-light rounded-md hover:bg-bg-dark hover:dark:bg-bg-light hover:text-slate-50 dark:hover:text-slate-900 transition-all duration-300 ease-in-out
+    }
+
+    .modal-container{
+      @apply bg-secondaryBg-light dark:bg-secondaryBg-dark w-full max-w-[400px] px-8 pb-12 pt-16 flex flex-col items-center rounded-lg shadow-lg text-sm
+    }
+  }
