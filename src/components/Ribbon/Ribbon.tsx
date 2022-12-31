@@ -1,5 +1,3 @@
-"use client"
-
 import { MdOutlineAttachEmail } from "react-icons/md";
 import { RiTimerFlashLine } from "react-icons/ri";
 import { TiUserDeleteOutline } from "react-icons/ti"

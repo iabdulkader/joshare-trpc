@@ -1,5 +1,3 @@
-"use client"
-
 import { FileIcon, defaultStyles } from "react-file-icon";
 
 export default function ProgressBar() {
