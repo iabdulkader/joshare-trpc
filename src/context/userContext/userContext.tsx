@@ -5,8 +5,8 @@ import { ActionType, User } from "../../types";
 const initialState: User = {
   pin: "",
   expire: new Date(0),
-  emailSent: 0,
-  timeExtented: 0
+  emailRemaining: 2,
+  timeExtRemaining: 2
 }
 
 export const UserContext = createContext(initialState);
@@ -27,8 +27,8 @@ export default function UserContextProvider({ children }: { children: React.Reac
   const value = {
     pin: state.pin,
     expire: state.expire,
-    emailSent: state.emailSent,
-    timeExtented: state.timeExtented,
+    emailRemaining: state.emailRemaining,
+    timeExtRemaining: state.timeExtRemaining,
     updatePin,
     updateExpire
   }

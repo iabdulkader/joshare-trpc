@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext/userContext";
 import Button from "../Button/Button"
 
 export default function AddTime() {
+    const { timeExtRemaining } = useContext(UserContext);
     const options = []
 
     for (var i = 0; i <= 24; i++) {
@@ -14,7 +17,7 @@ export default function AddTime() {
             </div>
 
             <div className="mb-4">
-                <p>Attempts Remaining 2</p>
+                <p>Attempts Remaining {timeExtRemaining}</p>
             </div>
 
             <div>

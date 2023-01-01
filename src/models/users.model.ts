@@ -12,11 +12,11 @@ const userSchema = new Schema<User>({
         type: Date,
         required: true,
     },
-    emailSent: {
+    emailRemaining: {
         type: Number,
         default: 0
     },
-    timeExtented: {
+    timeExtRemaining: {
         type: Number,
         default: 0
     },
