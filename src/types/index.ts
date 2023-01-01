@@ -9,8 +9,8 @@ export enum Path {
 export interface User {
     pin: string,
     expire: Date,
-    emailSent?: number,
-    timeExtented?: number,
+    emailRemaining?: number,
+    timeExtRemaining?: number,
     files?: File[],
     updatePin?: (pin: string) => void,
     updateExpire?: (expire: Date) => void,
