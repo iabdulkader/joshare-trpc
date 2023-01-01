@@ -7,7 +7,7 @@ export default function UploadFiles({ height = 10 }: { height?: number }) {
     return (
       
         <Button 
-          height={10} 
+          height={height} 
           width={32} 
           text="Upload Files" 
           onClick={signup}
