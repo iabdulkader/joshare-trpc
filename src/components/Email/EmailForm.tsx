@@ -1,3 +1,5 @@
+import Button from "../Button/Button";
+
 export default function EmailForm() {
     return (
         <div className="modal-container">
@@ -33,8 +35,8 @@ export default function EmailForm() {
             >To</label>
           </div>
 
-          <div>
-            <button className="button w-24 h-8 mt-4">Send</button>
+          <div className="mt-4">
+            <Button text="Send" width={24} height={8} />
           </div>
 
         </div>

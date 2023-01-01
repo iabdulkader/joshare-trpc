@@ -1,3 +1,5 @@
+import Button from "../Button/Button"
+
 export default function AddTime() {
     const options = []
 
@@ -24,8 +26,8 @@ export default function AddTime() {
                 </select>
             </div>
 
-            <div>
-                <button className="button w-24 h-8 mt-4">Send</button>
+            <div className="mt-4">
+                <Button text="Add Time" width={24} height={8} />
             </div>
        </div>
       )

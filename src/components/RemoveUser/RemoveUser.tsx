@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { removeUser } from "../../utlis/token";
 import { modal } from "modal-rt";
+import Button from "../Button/Button";
 
 export default function RemoveUser() {
     const router = useRouter();
@@ -20,8 +21,8 @@ export default function RemoveUser() {
                 Although your current session&apos;s files won&apos;t get deleted before 24 hours unless you manually delete them while you are in that session. That means even after clearing this session your files can be downloaded with Share Link, QR Code or with PIN before they expires in 24 hours.</p>
             </div>
 
-            <div>
-                <button onClick={deleteUser} className="button w-24 h-8 mt-4">Remove User</button>
+            <div className="mt-4">
+                <Button text="Remove User" width={24} height={8} onClick={deleteUser} />
             </div>
        </div>
       )
