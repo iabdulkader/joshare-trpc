@@ -11,11 +11,18 @@ export default function Button({
     height?: number, 
     width?: number 
    }) {
+
+    let widthStyle = {
+        width: `${width! / 4}rem`
+    };
+
+
     return (
         <button 
+          style={widthStyle}
           onClick={onClick}
           disabled={loading}
-          className={`button group flex justify-center items-center w-${width} h-${height}`}
+          className={`button group flex justify-center items-center h-${height!}`}
         >
           {loading ? 
           (
