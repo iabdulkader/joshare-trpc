@@ -1,11 +1,18 @@
 import useSignup from "../../hooks/useSignup";
+import Button from "./Button";
 
-export default function UploadFiles() {
-    const {signup} = useSignup();
+export default function UploadFiles({ height = 10 }: { height?: number }) {
+    const { signup, isLoading } = useSignup();
 
     return (
       
-        <button onClick={signup} className="button h-8 w-36">Upload Files</button>
+        <Button 
+          height={height} 
+          width={32} 
+          text="Upload Files" 
+          onClick={signup}
+          loading={isLoading} 
+        />
        
       )
 }
