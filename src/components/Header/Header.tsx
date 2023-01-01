@@ -28,7 +28,7 @@ export default function Header({ path }: { path: string }) {
                     { Object.values(Path).includes(path as Path) ? 
                         (
                         <div className="flex flex-row items-center gap-3 lg:gap-6 pr-2">
-                            {/* <UploadFiles height={8} /> */}
+                            <UploadFiles height={8} />
                         </div>
                         ): 
                         (
