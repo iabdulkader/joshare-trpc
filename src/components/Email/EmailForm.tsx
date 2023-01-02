@@ -1,10 +1,14 @@
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext/userContext";
 import Button from "../Button/Button";
 
 export default function EmailForm() {
+    const { emailRemaining } = useContext(UserContext)
+
     return (
         <div className="modal-container">
           <div className="mb-2">
-            Emails Remained 2
+            Emails Remained {emailRemaining}
           </div>
         
           <div className="w-full my-2 relative z-[0]">

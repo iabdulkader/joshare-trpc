@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import Files from "../../components/Files/Files";
 import PinHolder from "../../components/PinHolder/PinHolder";
@@ -8,11 +9,15 @@ import { getUser } from "../../utlis/token";
 
 
 export default function MyFiles(){
-
+    const router = useRouter();
     const { updatePin, updateExpire } = useContext(UserContext);
 
     useEffect(() => {
         let user = getUser();
+
+        if(user === null) {
+            router.push("/");
+        }
 
         if(user !== null && user.pin && updatePin && updateExpire){
             updatePin(user.pin);

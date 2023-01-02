@@ -51,7 +51,7 @@ userSchema.index( { "expire": 1 }, { expireAfterSeconds: 0 } );
 
 const userModelFunction = () => {
     return mongoose.models && mongoose.models.User
-      ? mongoose.models.User
+      ? mongoose.models.User as mongoose.Model<User>
       : model<User>("User", userSchema);
   };
 

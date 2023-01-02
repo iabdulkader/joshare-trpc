@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import { signToken } from './../../utlis/token';
 import { User } from './../../types/index';
 import { generatePin } from './../../utlis/signUp';
@@ -34,6 +35,35 @@ export const user = router({
                 },
                 token
             };
+        }
+    }),
+
+    getUser: publicProcedure
+    .input(z.object({
+        pin: string()
+    }))
+    .mutation(async ({ ctx, input }) => {
+        const { pin } = input;
+
+        if(user){
+            const user = await (await ctx).userModel.findOne({
+                pin
+            })
+            if(user){
+                return {
+                    message: "user found",
+                    user
+                }
+            } else {
+                throw new TRPCError({
+                    code: 'BAD_REQUEST',
+                    message: 'user not found'
+                })
+            }
+        } else {
+            return {
+                message: "user not found"
+            }
         }
     })
 })

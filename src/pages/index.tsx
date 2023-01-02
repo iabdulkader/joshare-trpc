@@ -1,9 +1,16 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
 import UploadFiles from '../components/Button/UploadFiles'
 import HomeInput from '../components/InputBox/HomeInput'
 import Logo from '../components/Logo/Logo'
+import { UserContext } from '../context/userContext/userContext'
+import { trpc } from '../utlis/trpc'
 
 export default function Home() {
+  trpc.home.isAlive.useQuery()
+
+
   return (
     <>
       <Head>
