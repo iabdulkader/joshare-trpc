@@ -4,12 +4,14 @@ import Files from "../../components/Files/Files";
 import MetaHead from "../../components/Head/Head";
 import PinHolder from "../../components/PinHolder/PinHolder";
 import { UserContext } from "../../context/userContext/userContext";
+import { getUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 
 export default function Pin(){
     const router = useRouter();
     const { updatePin, updateExpire } = useContext(UserContext);
     const { pin } = router.query;
+    const user = getUser();
 
     const { mutate} = trpc.user.getUser.useMutation({
         onSuccess: (data) => {
@@ -23,6 +25,10 @@ export default function Pin(){
             router.push("/");
         }
     })
+
+    if(pin && user && user?.pin === pin){
+        router.push("/myfiles");
+    }
 
     if(pin && (pin?.length < 8 || pin.length > 8 || isNaN(pin as any))){
         router.push("/");
