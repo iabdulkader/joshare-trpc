@@ -5,6 +5,7 @@ const dbConnect = async () => {
     throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
   }
   const uri = process.env.MONGODB_URI;
+  mongoose.set('strictQuery', false);
   await mongoose.connect(uri);
 
   const connection = mongoose.connection;
