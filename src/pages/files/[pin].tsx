@@ -4,7 +4,7 @@ import Files from "../../components/Files/Files";
 import MetaHead from "../../components/Head/Head";
 import PinHolder from "../../components/PinHolder/PinHolder";
 import { UserContext } from "../../context/userContext/userContext";
-import { trpc } from "../../utlis/trpc";
+import { trpc } from "../../utlis/trpc/trpc";
 
 export default function Pin(){
     const router = useRouter();

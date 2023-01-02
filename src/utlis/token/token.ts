@@ -1,7 +1,7 @@
 import cookie from 'js-cookie';
 import jwt from 'jsonwebtoken';
-import jwtDecode, { JwtPayload } from 'jwt-decode';
-import { User } from '../types';
+import jwtDecode from 'jwt-decode';
+import { User } from '../../types';
 
 export const getUser = (): User | null => {
     let token = cookie.get("token")

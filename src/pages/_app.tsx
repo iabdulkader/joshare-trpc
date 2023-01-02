@@ -9,7 +9,7 @@ import Loader from '../components/Loader/Loader'
 import Header from '../components/Header/Header'
 
 import { useRouter } from 'next/router'
-import { trpc } from '../utlis/trpc'
+import { trpc } from '../utlis/trpc/trpc'
 import UserContextProvider from '../context/userContext/userContext'
 
 function App({ Component, pageProps }: AppProps) {

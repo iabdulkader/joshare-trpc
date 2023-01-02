@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server';
-import { signToken } from './../../utlis/token';
+import { signToken } from '../../utlis/token/token';
 import { User } from './../../types/index';
-import { generatePin } from './../../utlis/signUp';
+import { generatePin } from '../../utlis/signup/signUp';
 import { string, z } from 'zod'
 import { router, publicProcedure } from './../createRouter';
 

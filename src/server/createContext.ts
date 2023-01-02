@@ -1,4 +1,4 @@
-import { decodeUser, getUser } from './../utlis/token';
+import { decodeUser, getUser } from '../utlis/token/token';
 import { NextApiRequest, NextApiResponse } from 'next'
 import { userModel } from '../models/users.model'
 import dbConnect from '../db/mongoose'

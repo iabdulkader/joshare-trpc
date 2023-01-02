@@ -3,7 +3,7 @@ import UploadFiles from '../components/Button/UploadFiles'
 import MetaHead from '../components/Head/Head'
 import HomeInput from '../components/InputBox/HomeInput'
 import Logo from '../components/Logo/Logo'
-import { trpc } from '../utlis/trpc'
+import { trpc } from '../utlis/trpc/trpc'
 
 export default function Home() {
   trpc.home.isAlive.useQuery();

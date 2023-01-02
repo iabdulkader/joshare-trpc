@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { removeUser } from "../../utlis/token";
+import { removeUser } from "../../utlis/token/token";
 import { modal } from "modal-rt";
 import Button from "../Button/Button";
 

@@ -6,8 +6,8 @@ import PinHolder from "../../components/PinHolder/PinHolder";
 import Ribbon from "../../components/Ribbon/Ribbon";
 import UploadBox from "../../components/Upload/UploadBox";
 import { UserContext } from "../../context/userContext/userContext";
-import { getUser } from "../../utlis/token";
-import { trpc } from "../../utlis/trpc";
+import { getUser } from "../../utlis/token/token";
+import { trpc } from "../../utlis/trpc/trpc";
 
 
 export default function MyFiles(){
