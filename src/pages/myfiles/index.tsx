@@ -17,6 +17,7 @@ export default function MyFiles(){
     const { mutate } = trpc.user.getUser.useMutation({
         onSuccess: (data) => {
             rawStateUpdate!({ payload: data?.user?.emailRemaining!, field: "emailRemaining" })
+            rawStateUpdate!({ payload: data?.user?.timeExtRemaining!, field: "timeExtRemaining" })
         }
     });
     

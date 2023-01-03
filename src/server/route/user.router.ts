@@ -1,8 +1,9 @@
 import { TRPCError } from '@trpc/server';
+import moment from 'moment';
+import { string, z } from 'zod'
 import { signToken } from '../../utlis/token/token';
 import { User } from './../../types/index';
 import { generatePin } from '../../utlis/signup/signUp';
-import { string, z } from 'zod'
 import { router, publicProcedure, privateProcedure } from './../createRouter';
 import { emailSender } from '../../utlis/email/emailService';
 
@@ -69,7 +70,7 @@ export const user = router({
         }
     }),
 
-    sendEmail: publicProcedure
+    sendEmail: privateProcedure
     .input(z.object({
         to: string(),
         from: string().optional()
@@ -115,7 +116,44 @@ export const user = router({
                 messageId
             }
         }
+    }),
+
+    extendTime: privateProcedure
+    .input(z.object({
+        pin: string(),
+        hour: z.number().min(1).max(24),
+        expire: z.date()
+    }))
+    .mutation(async ({ ctx, input }) => {
+        const { pin, hour, expire: prevExpire } = input;
+
+        try {
+            const { expire, timeExtRemaining } = await (await ctx).userModel.findOneAndUpdate({
+                pin
+            }, { 
+                $inc: {
+                  timeExtRemaining: -1
+                },
+                $set : {
+                  expire: moment(prevExpire).add(hour, "hours")
+                }
+              }, {new: true}) as User;
+    
+    
+            return {
+                success: true,
+                message: "time extended",
+                expire,
+                timeExtRemaining
+            }
+        } catch (error : any) {
+            return {
+                success: false,
+                message: error.message
+            }
+        }
     })
-        
+
+      
 })
 
