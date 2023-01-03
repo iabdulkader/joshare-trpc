@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import UserReducer from "./userReducer";
-import { ActionType, User } from "../../types";
+import { ActionType, User, UserKeys, UserValues } from "../../types";
 
 const initialState: User = {
   pin: "",
@@ -13,28 +13,22 @@ export const UserContext = createContext(initialState);
 
 export default function UserContextProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(UserReducer, initialState);
-  
 
-  const updatePin = (pin: string): void => {
-    dispatch({ type: ActionType.UPDATE_PIN, payload: pin });
-    }
-
-  const updateExpire = (expire: Date): void => {
-    dispatch({ type: ActionType.UPDATE_EXPIRE, payload: expire });
+    const rawStateUpdate = ({ payload, field }: { payload: UserValues, field: UserKeys}) => {
+      dispatch({ type: ActionType.RAW_UPDATE_STATE, payload, field });
     }
   
   
-  const value = {
-    pin: state.pin,
-    expire: state.expire,
-    emailRemaining: state.emailRemaining,
-    timeExtRemaining: state.timeExtRemaining,
-    updatePin,
-    updateExpire
-  }
+    const value = {
+      pin: state.pin,
+      expire: state.expire,
+      emailRemaining: state.emailRemaining,
+      timeExtRemaining: state.timeExtRemaining,
+      rawStateUpdate
+    }
   
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>)
+    return (
+      <UserContext.Provider value={value}>
+        {children}
+      </UserContext.Provider>)
 }

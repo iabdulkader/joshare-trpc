@@ -14,11 +14,11 @@ const userSchema = new Schema<User>({
     },
     emailRemaining: {
         type: Number,
-        default: 0
+        default: 2
     },
     timeExtRemaining: {
         type: Number,
-        default: 0
+        default: 2
     },
     files: [
         {

@@ -3,7 +3,8 @@ import { signToken } from '../../utlis/token/token';
 import { User } from './../../types/index';
 import { generatePin } from '../../utlis/signup/signUp';
 import { string, z } from 'zod'
-import { router, publicProcedure } from './../createRouter';
+import { router, publicProcedure, privateProcedure } from './../createRouter';
+import { emailSender } from '../../utlis/email/emailService';
 
 export const user = router({
     signup: publicProcedure
@@ -48,7 +49,8 @@ export const user = router({
         if(user){
             const user = await (await ctx).userModel.findOne({
                 pin
-            })
+            }) as User;
+
             if(user){
                 return {
                     message: "user found",
@@ -65,6 +67,55 @@ export const user = router({
                 message: "user not found"
             }
         }
+    }),
+
+    sendEmail: publicProcedure
+    .input(z.object({
+        to: string(),
+        from: string().optional()
+    }))
+    .mutation(async ({ ctx, input }) => {
+        const { to, from } = input;
+        const { pin, expire } = (await ctx).user as User;
+
+        const { success, message, messageId } = await emailSender({
+            to,
+            from,
+            pin,
+            expire
+        })
+
+        if(success){
+            try {
+                let { emailRemaining } = await (await ctx).userModel.findOneAndUpdate({
+                    pin 
+                }, {
+                    $inc: {
+                        emailRemaining: -1
+                    }
+                }, { new: true }) as User;
+                
+                return {
+                    emailRemaining,
+                    success,
+                    message,
+                    messageId
+                }
+            } catch (error) {
+                return {
+                    success: false,
+                    message,
+                    messageId
+                }
+            }
+        } else {
+            return {
+                success,
+                message,
+                messageId
+            }
+        }
     })
+        
 })
 

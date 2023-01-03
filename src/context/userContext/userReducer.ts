@@ -15,6 +15,18 @@ export default function UserReducer(state: User, action: Action): User {
                 expire: action.payload
             };
 
+        case ActionType.UPDATE_EMAIL_REMAINING:
+            return {
+                ...state,
+                emailRemaining: action.payload
+            };
+
+        case ActionType.RAW_UPDATE_STATE:
+            return {
+                ...state,
+                [action.field]: action.payload
+            };
+
         default:
             return state; 
 

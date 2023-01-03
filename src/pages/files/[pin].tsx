@@ -9,16 +9,14 @@ import { trpc } from "../../utlis/trpc/trpc";
 
 export default function Pin(){
     const router = useRouter();
-    const { updatePin, updateExpire } = useContext(UserContext);
+    const { rawStateUpdate } = useContext(UserContext);
     const { pin } = router.query;
     const user = getUser();
 
     const { mutate} = trpc.user.getUser.useMutation({
         onSuccess: (data) => {
             if(data?.user){
-                if(updateExpire){
-                    updateExpire(new Date(data?.user?.expire))
-                }
+                rawStateUpdate!({ payload: new Date(data?.user?.expire), field: "expire" })
             }
         },
         onError: (error) => {
@@ -26,19 +24,19 @@ export default function Pin(){
         }
     })
 
+    
     if(pin && user && user?.pin === pin){
-        router.push("/myfiles");
-    }
-
+            router.push("/myfiles");
+        }
+    
     if(pin && (pin?.length < 8 || pin.length > 8 || isNaN(pin as any))){
         router.push("/");
     }
     
     
-    
-    useEffect(() => {
-        if (pin && updatePin) {
-            updatePin(pin as string);
+    useEffect(() => { 
+        if (pin) {
+            rawStateUpdate!({ payload: pin as string, field: "pin" });
             mutate({ pin: pin as string })
         };
     }, [pin])

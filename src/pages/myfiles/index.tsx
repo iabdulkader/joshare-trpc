@@ -13,19 +13,25 @@ import { trpc } from "../../utlis/trpc/trpc";
 export default function MyFiles(){
     trpc.home.isAlive.useQuery();
     const router = useRouter();
-    const { updatePin, updateExpire } = useContext(UserContext);
-    let user = getUser();
-
+    const { rawStateUpdate } = useContext(UserContext);
+    const { mutate } = trpc.user.getUser.useMutation({
+        onSuccess: (data) => {
+            rawStateUpdate!({ payload: data?.user?.emailRemaining!, field: "emailRemaining" })
+        }
+    });
+    
+    
     useEffect(() => {
+        let user = getUser();
         if(user === null) {
             router.push("/");
         }
 
-        if(user !== null && user.pin && updatePin && updateExpire){
-            updatePin(user.pin);
-            updateExpire(user.expire);
+        if(user !== null && user.pin){
+            rawStateUpdate!({ payload: user.pin, field: "pin" });
+            rawStateUpdate!({ payload: user.expire, field: "expire" });
+            mutate({ pin: user.pin });
         }
-        
     }, [])
     
     return(

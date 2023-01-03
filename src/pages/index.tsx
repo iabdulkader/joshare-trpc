@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import UploadFiles from '../components/Button/UploadFiles'
 import MetaHead from '../components/Head/Head'
 import HomeInput from '../components/InputBox/HomeInput'

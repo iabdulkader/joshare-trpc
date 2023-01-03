@@ -42,7 +42,7 @@ export default function CountDown() {
         
         countDown();
         const interval = setInterval(() => {
-        countDown();
+            countDown();
         }, 1000);
         
         return () => clearInterval(interval);
