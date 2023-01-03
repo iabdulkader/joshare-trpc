@@ -22,16 +22,16 @@ export const decodeUser = (token: string): User | null => {
     return null;
 }
 
-export const setUser = (token: string) => {
-    cookie.set("token", token, { expires: 1 });
+export const setUser = (token: string, expire?: Date) => {
+    cookie.set("token", token, { expires: expire || 1 });
 }
 
 export const removeUser = () => {
     cookie.remove("token");
 }
 
-export const signToken = (user: User) => {
-    return jwt.sign(user, process.env.JWT_SECRET as string, {
-        expiresIn: "1d"
+export const signToken = async (user: User, expire?: Date) => {
+    return await jwt.sign(user, process.env.JWT_SECRET as string, {
+        expiresIn: expire?.getTime() || "1d"
     });
 }

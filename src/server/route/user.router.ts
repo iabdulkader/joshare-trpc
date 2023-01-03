@@ -27,7 +27,7 @@ export const user = router({
     
             const { pin, expire }: User = await newUser.save();
             
-            let token = signToken({ pin, expire });
+            let token = await signToken({ pin, expire });
     
             return {
                 message: "user created",
@@ -128,7 +128,7 @@ export const user = router({
         const { pin, hour, expire: prevExpire } = input;
 
         try {
-            const { expire, timeExtRemaining } = await (await ctx).userModel.findOneAndUpdate({
+            const { timeExtRemaining, expire } = await (await ctx).userModel.findOneAndUpdate({
                 pin
             }, { 
                 $inc: {
@@ -138,9 +138,12 @@ export const user = router({
                   expire: moment(prevExpire).add(hour, "hours")
                 }
               }, {new: true}) as User;
+
+              const token: string = await signToken({ pin, expire }, expire);
   
             return {
                 success: true,
+                token,
                 message: "time extended",
                 expire,
                 timeExtRemaining

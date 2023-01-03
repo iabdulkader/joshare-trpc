@@ -2,6 +2,7 @@ import { modal } from "modal-rt";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { UserContext } from "../../context/userContext/userContext";
+import { setUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 import Button from "../Button/Button"
 
@@ -11,10 +12,12 @@ export default function AddTime() {
     const options = [];
 
     const { mutate, isLoading } = trpc.user.extendTime.useMutation({
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
+            console.log(data.token)
             if(data.success) {
                 rawStateUpdate!({ field: "timeExtRemaining", payload: data.timeExtRemaining })
                 rawStateUpdate!({ field: "expire", payload: data.expire })
+                setUser(data.token!, data.expire)
                 toast.success("Time Extended")
 
                 setTimeout(() => {
