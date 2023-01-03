@@ -18,6 +18,7 @@ export default function MyFiles(){
         onSuccess: (data) => {
             rawStateUpdate!({ payload: data?.user?.emailRemaining!, field: "emailRemaining" })
             rawStateUpdate!({ payload: data?.user?.timeExtRemaining!, field: "timeExtRemaining" })
+            rawStateUpdate!({ payload: new Date(data?.user?.expire!), field: "expire" })
         }
     });
     

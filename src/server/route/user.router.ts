@@ -138,8 +138,7 @@ export const user = router({
                   expire: moment(prevExpire).add(hour, "hours")
                 }
               }, {new: true}) as User;
-    
-    
+  
             return {
                 success: true,
                 message: "time extended",
