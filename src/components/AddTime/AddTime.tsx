@@ -13,7 +13,7 @@ export default function AddTime() {
 
     const { mutate, isLoading } = trpc.user.extendTime.useMutation({
         onSuccess: async (data) => {
-            console.log(data.token)
+            (data.token)
             if(data.success) {
                 rawStateUpdate!({ field: "timeExtRemaining", payload: data.timeExtRemaining })
                 rawStateUpdate!({ field: "expire", payload: data.expire })
