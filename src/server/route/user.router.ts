@@ -60,7 +60,7 @@ export const user = router({
             } else {
                 throw new TRPCError({
                     code: 'BAD_REQUEST',
-                    message: 'user not found'
+                    message: 'User with pin not found.'
                 })
             }
         } else {

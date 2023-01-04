@@ -6,8 +6,10 @@ import { useRouter } from 'next/router';
 
 export default function HomeInput() {
     const [pin, setPin] = useState<string>("");
+    const [error, setError] = useState<string>("");
     const router = useRouter();
     const user = getUser()
+
     const { mutate, isLoading } = trpc.user.getUser.useMutation({
         onSuccess: (data) => {
             if(data?.user?.pin && user?.pin === data?.user?.pin){
@@ -18,26 +20,39 @@ export default function HomeInput() {
                 router.push(`/files/${data?.user?.pin}`);
             }
             
+        },
+        onError: (err) => {
+            setError(err.message);
         }
     });
 
+
     const getUserByPin = () => {
         if(pin.length !== 8){
+            setError("Pin must be 8 characters long");
             return;
         }
         mutate({ pin });
     }
+    
 
     return(
-        <div className="w-full flex justify-center">
-            <div className="w-full h-12 bg-transparent max-w-[250px] lg:max-w-[300px] flex items-center border border-bg-dark dark:border-bg-light rounded-lg">
+        <div className="w-full flex flex-col justify-center">
+            <div 
+                className={`w-full focus-within:border-green-700 dark:focus-within:border-green-700 focus-within:scale-105 transition-all duration-300 h-12 mx-auto bg-transparent max-w-[250px] lg:max-w-[300px] flex items-center border border-bg-dark dark:border-bg-light rounded-lg ${error ? "border-red-500 dark:border-red-500" : ""}`}
+                >
                 <input 
                     className="w-full h-full border-none outline-none bg-transparent px-5" 
                     value={pin}
-                    onChange={(e) => setPin(e.target.value)}
+                    onChange={(e) => {
+                        setPin(e.target.value)
+                        setError("");
+                    }}
                     type="number" 
                     placeholder="Paste pin..." 
+                    required
                 />
+
                 
                 <div className="mx-2 h-full flex justify-center items-center">
                     { isLoading ? 
@@ -54,6 +69,9 @@ export default function HomeInput() {
                 
             </div>
             
+            <p className="h-5 pt-[.15rem] text-center  peer-focus:bg-green-500 text-red-600 dark:text-red-700 text-sm">
+                {error}
+            </p>
         </div>
         )
     }

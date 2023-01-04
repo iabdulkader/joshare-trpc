@@ -21,7 +21,7 @@ export default function Home() {
 
           <div className="flex-col my-3 mb-16">
             <HomeInput />
-            <div className="flex justify-center my-5">
+            <div className="flex justify-center my-2">
               <UploadFiles />         
             </div>
           </div>
