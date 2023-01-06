@@ -3,13 +3,15 @@ export default function Button({
     onClick, 
     loading = false, 
     height, 
-    width 
+    width ,
+    type = "button",
    } : { 
     text: string, 
     onClick?: () => void, 
     loading?: boolean, 
     height?: number, 
-    width?: number 
+    width?: number ,
+    type?: "submit" | "button" | "reset",
    }) {
 
     let widthStyle = {
@@ -19,6 +21,7 @@ export default function Button({
 
     return (
         <button 
+          type={type}
           style={widthStyle}
           onClick={onClick}
           disabled={loading}

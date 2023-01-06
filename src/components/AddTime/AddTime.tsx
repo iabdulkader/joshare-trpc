@@ -35,15 +35,17 @@ export default function AddTime() {
     }
 
     const addTime = () => {
+        if(timeExtRemaining === 0) {
+            toast.error("Time Extention limit exceeded")
+            return
+        }
+
         if(hour === 0) {
             toast.error("Select time to extend")
             return
         };
 
-        if(timeExtRemaining === 0) {
-            toast.error("Time Extention limit exceeded")
-            return
-        }
+        
 
         mutate({ hour, pin, expire })
     }
@@ -59,7 +61,8 @@ export default function AddTime() {
             </div>
 
             <div>
-                <select 
+                <select
+                    disabled={timeExtRemaining === 0} 
                     value={hour}
                     onChange={(e) => setHour(parseInt(e.target.value))}
                     className="bg-transparent border-b border-gray-300 focus:border-blue-500 text-slate-800 outline-none dark:text-slate-200 w-24 h-8 scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-900 scrollbar-track-secondaryBg-light dark:scrollbar-track-secondaryBg-dark scrollbar-thumb-rounded-lg scrollbar-thin"
@@ -70,7 +73,13 @@ export default function AddTime() {
             </div>
 
             <div className="mt-4">
-                <Button text="Add Time" loading={isLoading} onClick={addTime} width={24} height={8} />
+                <Button 
+                    text="Add Time" 
+                    loading={isLoading} 
+                    onClick={addTime} 
+                    width={24} 
+                    height={8} 
+                />
             </div>
        </div>
       )

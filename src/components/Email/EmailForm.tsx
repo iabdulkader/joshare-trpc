@@ -22,10 +22,17 @@ export default function EmailForm() {
         }
     });
 
-    const send = () => {
+    const send = (e: any) => {
+        e.preventDefault();
+
         if(emailRemaining === 0 || emailRemaining! < 0){
             toast.error("You have no email remaining");
             return;
+        }
+
+        if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ig.test(to) === false){
+          toast.error("Invalid email");
+          return;
         }
         
         if(to){
@@ -37,7 +44,7 @@ export default function EmailForm() {
     }
 
     return (
-        <div className="modal-container">
+        <form className="modal-container" onSubmit={send}>
           <div className="mb-2">
             Emails Remained {emailRemaining}
           </div>
@@ -75,9 +82,9 @@ export default function EmailForm() {
           </div>
 
           <div className="mt-4">
-            <Button text="Send" onClick={send} loading={isLoading} width={24} height={8} />
+            <Button text="Send" type="submit" loading={isLoading} width={24} height={8} />
           </div>
 
-        </div>
+        </form>
       )
 }

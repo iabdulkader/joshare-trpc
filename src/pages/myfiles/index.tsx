@@ -6,7 +6,7 @@ import PinHolder from "../../components/PinHolder/PinHolder";
 import Ribbon from "../../components/Ribbon/Ribbon";
 import UploadBox from "../../components/Upload/UploadBox";
 import { UserContext } from "../../context/userContext/userContext";
-import { getUser } from "../../utlis/token/token";
+import { getUser, removeUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 
 
@@ -23,6 +23,7 @@ export default function MyFiles(){
             rawStateUpdate!({ payload: new Date(data?.user?.expire!), field: "expire" })
         }, 
         onError: () => {
+            removeUser();
             router.push("/");
         }
     });

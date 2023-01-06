@@ -42,7 +42,8 @@ export default function HomeInput() {
         <div className="w-full flex flex-col justify-center">
             <form 
                 className={`w-full focus-within:${error ? "border-red-500" : "border-green-700"} focus-within:scale-105 transition-all duration-300 h-12 mx-auto bg-transparent max-w-[250px] lg:max-w-[300px] flex items-center border border-bg-dark dark:border-bg-light rounded-lg ${error ? "border-red-500 dark:border-red-500" : ""}`}
-                >
+                onSubmit={getUserByPin}
+            >
                 <input 
                     className="w-full h-full border-none outline-none bg-transparent px-5 peer" 
                     value={pin}
@@ -65,7 +66,7 @@ export default function HomeInput() {
                       </svg>
                     ) :
                     (
-                       <button onClick={getUserByPin}>
+                       <button>
                             <IoIosSearch className='cursor-pointer text-bg-dark dark:text-bg-light h-12 w-6' />
                        </button> 
                     )
