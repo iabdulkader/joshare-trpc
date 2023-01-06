@@ -27,7 +27,9 @@ export default function HomeInput() {
     });
 
 
-    const getUserByPin = () => {
+    const getUserByPin = (e: any) => {
+        e.preventDefault();
+
         if(pin.length !== 8){
             setError("Pin must be 8 characters long");
             return;
@@ -38,7 +40,7 @@ export default function HomeInput() {
 
     return(
         <div className="w-full flex flex-col justify-center">
-            <div 
+            <form 
                 className={`w-full focus-within:border-green-700 dark:focus-within:border-green-700 focus-within:scale-105 transition-all duration-300 h-12 mx-auto bg-transparent max-w-[250px] lg:max-w-[300px] flex items-center border border-bg-dark dark:border-bg-light rounded-lg ${error ? "border-red-500 dark:border-red-500" : ""}`}
                 >
                 <input 
@@ -62,12 +64,16 @@ export default function HomeInput() {
                         </circle>
                       </svg>
                     ) :
-                        <IoIosSearch onClick={getUserByPin} className='cursor-pointer text-bg-dark dark:text-bg-light h-12 w-6' />
+                    (
+                       <button onClick={getUserByPin}>
+                            <IoIosSearch className='cursor-pointer text-bg-dark dark:text-bg-light h-12 w-6' />
+                       </button> 
+                    )
                     }
                 </div>
                 
                 
-            </div>
+            </form>
             
             <p className="h-5 pt-[.15rem] text-center  peer-focus:bg-green-500 text-red-600 dark:text-red-700 text-sm">
                 {error}
