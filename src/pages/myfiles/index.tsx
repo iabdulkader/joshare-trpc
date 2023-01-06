@@ -40,14 +40,14 @@ export default function MyFiles(){
         <>
             <MetaHead title="My Files | JoShare" />
             
-            <div className="flex flex-col lg:flex-row lg:justify-center lg:gap-4 mt-16">
-                <div className="w-full max-w-[450px] h-full mx-auto my-3 lg:mt-6 lg:mb-20">
+            <div className="flex flex-col lg:flex-row lg:justify-center lg:gap-8 mt-16">
+                <div className="w-full max-w-[450px] h-full my-3 mx-auto lg:mx-0 lg:mt-6 lg:mb-20">
                     <PinHolder />
                     <Files />
                 </div>
 
 
-                <div className="w-full max-w-[450px] h-full mx-auto lg:my-6 lg:mb-20">
+                <div className="w-full max-w-[450px] h-full mx-auto lg:mx-0 lg:my-6 lg:mb-20">
                 <Ribbon />
                 <UploadBox />
                 </div>
