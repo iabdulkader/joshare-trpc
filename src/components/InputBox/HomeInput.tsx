@@ -41,10 +41,10 @@ export default function HomeInput() {
     return(
         <div className="w-full flex flex-col justify-center">
             <form 
-                className={`w-full focus-within:border-green-700 dark:focus-within:border-green-700 focus-within:scale-105 transition-all duration-300 h-12 mx-auto bg-transparent max-w-[250px] lg:max-w-[300px] flex items-center border border-bg-dark dark:border-bg-light rounded-lg ${error ? "border-red-500 dark:border-red-500" : ""}`}
+                className={`w-full focus-within:${error ? "border-red-500" : "border-green-700"} focus-within:scale-105 transition-all duration-300 h-12 mx-auto bg-transparent max-w-[250px] lg:max-w-[300px] flex items-center border border-bg-dark dark:border-bg-light rounded-lg ${error ? "border-red-500 dark:border-red-500" : ""}`}
                 >
                 <input 
-                    className="w-full h-full border-none outline-none bg-transparent px-5" 
+                    className="w-full h-full border-none outline-none bg-transparent px-5 peer" 
                     value={pin}
                     onChange={(e) => {
                         setPin(e.target.value)
@@ -75,7 +75,7 @@ export default function HomeInput() {
                 
             </form>
             
-            <p className="h-5 pt-[.15rem] text-center  peer-focus:bg-green-500 text-red-600 dark:text-red-700 text-sm">
+            <p className="h-5 pt-[.15rem] text-center text-red-600 dark:text-red-700 text-sm">
                 {error}
             </p>
         </div>
