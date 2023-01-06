@@ -12,19 +12,25 @@ import { trpc } from "../../utlis/trpc/trpc";
 
 export default function MyFiles(){
     trpc.home.isAlive.useQuery();
+
     const router = useRouter();
     const { rawStateUpdate } = useContext(UserContext);
+
     const { mutate } = trpc.user.getUser.useMutation({
         onSuccess: (data) => {
             rawStateUpdate!({ payload: data?.user?.emailRemaining!, field: "emailRemaining" })
             rawStateUpdate!({ payload: data?.user?.timeExtRemaining!, field: "timeExtRemaining" })
             rawStateUpdate!({ payload: new Date(data?.user?.expire!), field: "expire" })
+        }, 
+        onError: () => {
+            router.push("/");
         }
     });
     
     
     useEffect(() => {
         let user = getUser();
+
         if(user === null) {
             router.push("/");
         }
