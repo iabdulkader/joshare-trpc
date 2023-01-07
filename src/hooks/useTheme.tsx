@@ -25,6 +25,11 @@ export default function useTheme(){
             document.documentElement.classList.add('dark')
         }
 
+        let link = document.createElement('link');
+        link.rel = 'icon';
+        document.getElementsByTagName('head')[0].appendChild(link);
+        link.href = `/${activeTheme}.svg`;
+
     }, [activeTheme]);
 
     return { activeTheme, toggle }

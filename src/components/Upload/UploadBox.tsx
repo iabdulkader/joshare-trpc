@@ -1,5 +1,3 @@
-"use client"
-
 import { useRef } from "react";
 import FileIcon from "../Icons/FileIcon"
 import ProgressBar from "../ProgessBar/ProgressBar"
@@ -78,10 +76,10 @@ export default function UploadBox(){
               <ProgressBar />
               <ProgressBar />
 
-              <div className="group">
-                <div className="hidden group-[.is-published]:block">
-                    Published
-                </div>
+                <div className="group">
+                    <div className="hidden group-[.is-published]:block">
+                        Published
+                    </div>
                 </div>
            </div>
         </div>
