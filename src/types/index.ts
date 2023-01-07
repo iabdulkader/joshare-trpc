@@ -11,7 +11,7 @@ export interface User {
     expire: Date,
     emailRemaining?: number,
     timeExtRemaining?: number,
-    files?: File[],
+    files?: FileType[],
     rawStateUpdate?: ({ field, payload }: { field: UserKeys, payload: UserValues }) => void,
 }
 
@@ -19,7 +19,7 @@ export type UserValues = User[keyof User];
 export type UserKeys = keyof User;
 
 
-export interface File {
+export interface FileType {
     id: string;
     name: string;
     ext: string;
@@ -59,4 +59,21 @@ export interface emailService {
     pin: string;
     expire: Date;
 }
+
+
+export interface FilesContextType {
+    files: FileType[] | null;
+    uploadFiles?: (files: FileType[]) => void;
+}
+
+export enum FilesActionType {
+    UPLOAD_FILES = "UPLOAD_FILES",
+}
+
+export type FilesAction =
+    | {
+          type: FilesActionType.UPLOAD_FILES;
+          payload: FileType[];
+      }
+    
 

@@ -11,6 +11,7 @@ import Header from '../components/Header/Header'
 import { useRouter } from 'next/router'
 import { trpc } from '../utlis/trpc/trpc'
 import UserContextProvider from '../context/userContext/userContext'
+import FilesContextProvider from '../context/filesContext/filesContext'
 
 function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState<boolean>(false)
@@ -29,16 +30,18 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
       <UserContextProvider>
-        <Header path={router.pathname} />
+        <FilesContextProvider>
+          <Header path={router.pathname} />
 
-        { loading ?
-           <Loader /> :
-           <Component {...pageProps} />
-        }
-        
-        <Modal />
-        <Toaster />
-        <Footer />
+          { loading ?
+            <Loader /> :
+            <Component {...pageProps} />
+          }
+          
+          <Modal />
+          <Toaster />
+          <Footer />
+        </FilesContextProvider>
       </UserContextProvider>
       )
 }

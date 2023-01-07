@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { upload } from "../../utlis/upload";
+import { handleFiles } from "../../utlis/upload/handleFiles";
 import FileIcon from "../Icons/FileIcon"
 import ProgressBar from "../ProgessBar/ProgressBar"
 
@@ -41,6 +43,10 @@ export default function UploadBox(){
           }
       }
 
+      const uploadFiles = (e: any) => {
+        handleFiles(e.target.files)
+      }
+
     return(
         <div className="w-full px-4 top-[70vh] mb-24 lg:mb-8">
            <div className="w-full p-4 flex justify-between items-center bg-secondaryBg-light dark:bg-secondaryBg-dark  rounded-lg">
@@ -61,7 +67,8 @@ export default function UploadBox(){
                     <div className="flex flex-col items-center w-full mt-24 mb-4">
                     <input 
                         className="hidden"
-                        ref={fileRef} 
+                        ref={fileRef}
+                        onChange={uploadFiles} 
                         type="file" 
                         multiple
                     />

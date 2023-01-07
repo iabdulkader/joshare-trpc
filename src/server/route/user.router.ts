@@ -4,7 +4,7 @@ import { string, z } from 'zod'
 import { signToken } from '../../utlis/token/token';
 import { User } from './../../types/index';
 import { generatePin } from '../../utlis/signup/signUp';
-import { router, publicProcedure, privateProcedure } from './../createRouter';
+import { router, publicProcedure, privateProcedure } from '../createRouter';
 import { emailSender } from '../../utlis/email/emailService';
 
 export const user = router({

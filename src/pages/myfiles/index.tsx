@@ -5,6 +5,7 @@ import MetaHead from "../../components/Head/Head";
 import PinHolder from "../../components/PinHolder/PinHolder";
 import Ribbon from "../../components/Ribbon/Ribbon";
 import UploadBox from "../../components/Upload/UploadBox";
+import { FilesContext } from "../../context/filesContext/filesContext";
 import { UserContext } from "../../context/userContext/userContext";
 import { getUser, removeUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
@@ -14,6 +15,7 @@ export default function MyFiles(){
     trpc.home.isAlive.useQuery();
 
     const router = useRouter();
+    const { uploadFiles } = useContext(FilesContext);
     const { rawStateUpdate } = useContext(UserContext);
 
     const { mutate } = trpc.user.getUser.useMutation({
@@ -21,6 +23,8 @@ export default function MyFiles(){
             rawStateUpdate!({ payload: data?.user?.emailRemaining!, field: "emailRemaining" })
             rawStateUpdate!({ payload: data?.user?.timeExtRemaining!, field: "timeExtRemaining" })
             rawStateUpdate!({ payload: new Date(data?.user?.expire!), field: "expire" })
+
+            uploadFiles!(data?.user?.files!);
         }, 
         onError: () => {
             removeUser();
