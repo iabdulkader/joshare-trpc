@@ -28,7 +28,11 @@ export default function useTheme(){
         let link = document.createElement('link');
         link.rel = 'icon';
         document.getElementsByTagName('head')[0].appendChild(link);
-        link.href = `/${activeTheme}.svg`;
+        if(activeTheme === "dark"){
+            link.href = "/favicon-dark.ico"
+        } else {
+            link.href = "/favicon.ico"
+        }
 
     }, [activeTheme]);
 

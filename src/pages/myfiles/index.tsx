@@ -45,6 +45,8 @@ export default function MyFiles(){
             rawStateUpdate!({ payload: user.expire, field: "expire" });
             mutate({ pin: user.pin });
         }
+
+        return () => uploadFiles!(null);
     }, [])
     
     return(

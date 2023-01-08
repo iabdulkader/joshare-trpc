@@ -63,17 +63,29 @@ export interface emailService {
 
 export interface FilesContextType {
     files: FileType[] | null;
-    uploadFiles?: (files: FileType[]) => void;
+    uploadFiles?: (files: FileType[] | null) => void;
+    uploadFile?: (file: FileType) => void;
+    deleteFileByID?: (id: string) => void;
 }
 
 export enum FilesActionType {
     UPLOAD_FILES = "UPLOAD_FILES",
+    UPLOAD_FILE = "UPLOAD_FILE",
+    DELETE_FILE = "DELETE_FILE",
 }
 
 export type FilesAction =
     | {
           type: FilesActionType.UPLOAD_FILES;
-          payload: FileType[];
+          payload: FileType[] | null;
       }
+    | {
+          type: FilesActionType.UPLOAD_FILE;
+          payload: FileType;
+    }
+    | {
+          type: FilesActionType.DELETE_FILE;
+          payload: string;
+    }
     
 

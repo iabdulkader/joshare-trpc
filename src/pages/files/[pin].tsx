@@ -35,7 +35,6 @@ export default function Pin(){
         }
     
     if(pin && (pin?.length < 8 || pin.length > 8 || isNaN(pin as any))){
-        console.log("hey")
         router.push("/");
     }
     
@@ -45,6 +44,8 @@ export default function Pin(){
             rawStateUpdate!({ payload: pin as string, field: "pin" });
             mutate({ pin: pin as string })
         };
+
+        return () => uploadFiles!(null);
     }, [pin])
     
     

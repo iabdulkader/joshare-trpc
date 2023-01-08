@@ -1,5 +1,6 @@
-import { useRef } from "react";
-import { upload } from "../../utlis/upload";
+import { useContext, useRef } from "react";
+import { FilesContext } from "../../context/filesContext/filesContext";
+import { upload } from "../../utlis/upload/uploadFile";
 import { handleFiles } from "../../utlis/upload/handleFiles";
 import FileIcon from "../Icons/FileIcon"
 import ProgressBar from "../ProgessBar/ProgressBar"
@@ -7,6 +8,7 @@ import ProgressBar from "../ProgessBar/ProgressBar"
 export default function UploadBox(){
     const fileRef = useRef<HTMLInputElement>(null);
     const dragRef = useRef<HTMLDivElement >(null);
+    const { uploadFile } = useContext(FilesContext);
 
     const triggerFile = () => {
         if(fileRef.current){
@@ -44,7 +46,7 @@ export default function UploadBox(){
       }
 
       const uploadFiles = (e: any) => {
-        handleFiles(e.target.files)
+        handleFiles(e.target.files, uploadFile!)
       }
 
     return(
@@ -59,9 +61,9 @@ export default function UploadBox(){
                     onDrop={fileDrop}
                 >
                     <div className="w-full flex justify-center pt-8">
-                        <FileIcon className="group-[.drag]:rotate-12 group-[.drag]:scale-90 group-[.drag]:translate-x-5" />
-                        <FileIcon className="group-[.drag]:-rotate-12 group-[.drag]:scale-90 group-[.drag]:-translate-x-5" />
-                        <FileIcon className="group-[.drag]:-translate-y-1.5" />
+                        <FileIcon key={1} className="group-[.drag]:rotate-12 group-[.drag]:scale-90 group-[.drag]:translate-x-5" />
+                        <FileIcon key={2} className="group-[.drag]:-rotate-12 group-[.drag]:scale-90 group-[.drag]:-translate-x-5" />
+                        <FileIcon key={3} className="group-[.drag]:-translate-y-1.5" />
                     </div>
 
                     <div className="flex flex-col items-center w-full mt-24 mb-4">

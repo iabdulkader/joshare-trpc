@@ -8,6 +8,18 @@ export function FilesReducer(state: FilesContextType, action: FilesAction): File
         files: action.payload,
       };
 
+    case FilesActionType.UPLOAD_FILE:
+      return {
+        ...state,
+        files: [...state.files!, action.payload],
+      };
+
+    case FilesActionType.DELETE_FILE:
+      return {
+        ...state,
+        files: state.files!.filter((file) => file.id !== action.payload),
+      };
+
     default:
       return state;
   }

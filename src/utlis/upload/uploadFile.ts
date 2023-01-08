@@ -1,15 +1,17 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
 import { nanoid } from 'nanoid';
+import { FileType } from '../../types';
 
-export const upload = async (file: File) => {
+
+export const upload = async (file: File, uploadFile: (file: FileType) => void) => {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('fileId', nanoid(5));
 
     axios.request({
         method: "post", 
-        url: "http://localhost:5000/upload", 
+        url: `${process.env.NEXT_PUBLIC_FILES_SERVER}/upload`, 
         data: formData, 
         headers: {
             "x-authorization": `Bearer ${cookie.get('token')}`,
@@ -18,7 +20,7 @@ export const upload = async (file: File) => {
           console.log("progress", p.loaded / p.total!); 
         }
     }).then (data => {
-        console.log(data.data);
+        uploadFile!(data.data.data)
     })
    
 };
