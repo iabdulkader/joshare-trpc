@@ -22,14 +22,13 @@ export const files = router({
 
         if(file){
 
-            await fetch(`${process.env.NEXT_PUBLIC_FILES_SERVER}/delete/${id}`, {
+            await fetch(`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/delete`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "x-authorization": `Bearer ${(await ctx).req.cookies.token}`
                 },
                 body: JSON.stringify({
-                    id,
                     url
                 })
             });

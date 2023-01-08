@@ -1,5 +1,5 @@
 import { AiOutlineDownload, AiOutlineDelete } from 'react-icons/ai';
-import { FileIcon, defaultStyles, DefaultExtensionType, FileIconProps  } from 'react-file-icon';
+import { FileIcon, defaultStyles } from 'react-file-icon';
 import { FileType } from '../../types';
 import { downloadFile } from '../../utlis/download';
 import { trpc } from '../../utlis/trpc/trpc';
@@ -19,7 +19,10 @@ export default function File({ file }: { file: FileType}){
     })
 
     const deleteFile = () => {
-      mutate({ id: file.id, url: file.url })
+      mutate({ 
+        id: file.id, 
+        url: file.url 
+      })
     }
 
 

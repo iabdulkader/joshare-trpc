@@ -11,7 +11,7 @@ export const upload = async (file: File, uploadFile: (file: FileType) => void) =
 
     axios.request({
         method: "post", 
-        url: `${process.env.NEXT_PUBLIC_FILES_SERVER}/upload`, 
+        url: `${process.env.NEXT_PUBLIC_FILES_SERVER}/api/upload`, 
         data: formData, 
         headers: {
             "x-authorization": `Bearer ${cookie.get('token')}`,
