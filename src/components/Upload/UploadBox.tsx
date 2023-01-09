@@ -43,6 +43,8 @@ export default function UploadBox(){
           if (dragRef.current) {        
             dragRef.current.classList.remove("drag");
           }
+
+          handleFiles(e.dataTransfer.files, uploadFile!)
       }
 
       const uploadFiles = (e: any) => {
