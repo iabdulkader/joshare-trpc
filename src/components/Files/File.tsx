@@ -61,7 +61,7 @@ export default function File({ file }: { file: FileType}){
                 </ButtonWithIcon>
 
                 <ButtonWithIcon loading={dlLoading}>
-                  <AiOutlineDownload className='cursor-pointer' onClick={() => downloadFile(file.url, file.name)} />
+                  <AiOutlineDownload className='cursor-pointer' onClick={() => downloadFile(file.id, file.name)} />
                 </ButtonWithIcon>
               </div>
             </div>
