@@ -59,7 +59,7 @@ export default function File({ file }: { file: FileType}){
                   <AiOutlineDelete className='cursor-pointer' onClick={deleteFile} />  
                 </ButtonWithIcon>
 
-                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?token=${Cookies.get('token')}`}>
+                <Link target="_blank" href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?token=${Cookies.get('token')}`}>
                   <AiOutlineDownload 
                     className='cursor-pointer'
                   />
