@@ -22,7 +22,7 @@ export const files = router({
 
         if(file){
 
-            await fetch(`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/delete`, {
+            let response = await fetch(`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/delete`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -32,6 +32,8 @@ export const files = router({
                     url
                 })
             });
+
+            console.log(await response.json())
 
             return {
                 success: true,
