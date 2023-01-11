@@ -33,7 +33,6 @@ export const files = router({
                 })
             });
 
-            console.log(await response.json())
 
             return {
                 success: true,
