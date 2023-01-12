@@ -1,5 +1,5 @@
-import { FileType } from './../../types/index';
 import pLimit from "p-limit";
+import { FileType } from './../../types/index';
 import { upload } from "./uploadFile";
 
 let promises: any = [];

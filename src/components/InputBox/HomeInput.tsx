@@ -8,7 +8,7 @@ export default function HomeInput() {
     const [pin, setPin] = useState<string>("");
     const [error, setError] = useState<string>("");
     const router = useRouter();
-    const user = getUser()
+    const user = getUser();
 
     const { mutate, isLoading } = trpc.user.getUser.useMutation({
         onSuccess: (data) => {
