@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export default function File({ file }: { file: FileType}){
     const iconStyles = (defaultStyles as any)[file.ext || "docx"] || {};
-    const { deleteFileByID } = useContext(FilesContext);
+    const { deleteFileByID, currentPin } = useContext(FilesContext);
 
     const { mutate, isLoading } = trpc.files.deleteFile.useMutation({
       onSuccess: (data) => {
@@ -58,7 +58,7 @@ export default function File({ file }: { file: FileType}){
                   <AiOutlineDelete className='cursor-pointer' onClick={deleteFile} />  
                 </ButtonWithIcon>
 
-                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}`}>
+                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?pin=${currentPin}`}>
                   <AiOutlineDownload 
                     className='cursor-pointer'
                   />

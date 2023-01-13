@@ -63,7 +63,8 @@ export interface emailService {
 
 export interface FilesContextType {
     files: FileType[] | null;
-    uploadFiles?: (files: FileType[] | null) => void;
+    currentPin: string | null;
+    uploadFiles?: (files: FileType[] | null, pin: string) => void;
     uploadFile?: (file: FileType) => void;
     deleteFileByID?: (id: string) => void;
 }
@@ -78,6 +79,7 @@ export type FilesAction =
     | {
           type: FilesActionType.UPLOAD_FILES;
           payload: FileType[] | null;
+          pin: string;
       }
     | {
           type: FilesActionType.UPLOAD_FILE;

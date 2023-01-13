@@ -4,6 +4,7 @@ import { ActionType, FileType, FilesActionType, FilesContextType, UserKeys, User
 
 const initialState: FilesContextType = {
     files: null,
+    currentPin: null,
 };
 
 export const FilesContext = createContext(initialState);
@@ -11,10 +12,11 @@ export const FilesContext = createContext(initialState);
 export default function FilesContextProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(FilesReducer, initialState);
 
-    const uploadFiles = (files: FileType[] | null) => {
+    const uploadFiles = (files: FileType[] | null, pin: string) => {
         dispatch({
             type: FilesActionType.UPLOAD_FILES,
             payload: files,
+            pin,
         });
     };
 
@@ -34,6 +36,7 @@ export default function FilesContextProvider({ children }: { children: React.Rea
   
     let value = {
         files: state.files,
+        currentPin: state.currentPin,
         uploadFiles,
         uploadFile,
         deleteFileByID,

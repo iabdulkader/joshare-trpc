@@ -6,6 +6,7 @@ export function FilesReducer(state: FilesContextType, action: FilesAction): File
       return {
         ...state,
         files: action.payload,
+        currentPin: action.pin,
       };
 
     case FilesActionType.UPLOAD_FILE:
