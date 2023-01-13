@@ -21,7 +21,8 @@ export default function Pin(){
         onSuccess: (data) => {
             if(data?.user){
                 rawStateUpdate!({ payload: new Date(data?.user?.expire), field: "expire" })
-                uploadFiles!(data?.user?.files!, data?.user?.pin)
+                rawStateUpdate!({ payload: user?.pin, field: "pin" })
+                uploadFiles!(data?.user?.files!)
             }
         },
         onError: (error) => {
@@ -45,7 +46,7 @@ export default function Pin(){
             mutate({ pin: pin as string })
         };
 
-        return () => uploadFiles!(null, "");
+        return () => uploadFiles!(null);
     }, [pin])
     
     

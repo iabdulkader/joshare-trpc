@@ -6,10 +6,13 @@ import { useContext } from 'react';
 import { FilesContext } from '../../context/filesContext/filesContext';
 import ButtonWithIcon from '../Button/ButtonWithIcon';
 import Link from 'next/link';
+import { UserContext } from '../../context/userContext/userContext';
 
 export default function File({ file }: { file: FileType}){
     const iconStyles = (defaultStyles as any)[file.ext || "docx"] || {};
-    const { deleteFileByID, currentPin } = useContext(FilesContext);
+    const { deleteFileByID } = useContext(FilesContext);
+    const { pin } = useContext(UserContext);
+    
 
     const { mutate, isLoading } = trpc.files.deleteFile.useMutation({
       onSuccess: (data) => {
@@ -58,7 +61,7 @@ export default function File({ file }: { file: FileType}){
                   <AiOutlineDelete className='cursor-pointer' onClick={deleteFile} />  
                 </ButtonWithIcon>
 
-                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?pin=${currentPin}`}>
+                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?pin=${pin}`}>
                   <AiOutlineDownload 
                     className='cursor-pointer'
                   />

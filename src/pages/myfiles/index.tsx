@@ -24,7 +24,7 @@ export default function MyFiles(){
             rawStateUpdate!({ payload: data?.user?.timeExtRemaining!, field: "timeExtRemaining" })
             rawStateUpdate!({ payload: new Date(data?.user?.expire!), field: "expire" })
 
-            uploadFiles!(data?.user?.files!, data?.user?.pin!);
+            uploadFiles!(data?.user?.files!);
         }, 
         onError: () => {
             removeUser();
@@ -46,7 +46,7 @@ export default function MyFiles(){
             mutate({ pin: user.pin });
         }
 
-        return () => uploadFiles!(null, "");
+        return () => uploadFiles!(null);
     }, [])
     
     return(
