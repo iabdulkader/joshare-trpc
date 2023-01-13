@@ -5,7 +5,6 @@ import { trpc } from '../../utlis/trpc/trpc';
 import { useContext } from 'react';
 import { FilesContext } from '../../context/filesContext/filesContext';
 import ButtonWithIcon from '../Button/ButtonWithIcon';
-import Cookies from 'js-cookie';
 import Link from 'next/link';
 
 export default function File({ file }: { file: FileType}){
@@ -59,7 +58,7 @@ export default function File({ file }: { file: FileType}){
                   <AiOutlineDelete className='cursor-pointer' onClick={deleteFile} />  
                 </ButtonWithIcon>
 
-                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?token=${Cookies.get('token')}`}>
+                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}`}>
                   <AiOutlineDownload 
                     className='cursor-pointer'
                   />
