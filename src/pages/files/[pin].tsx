@@ -21,7 +21,6 @@ export default function Pin(){
         onSuccess: (data) => {
             if(data?.user){
                 rawStateUpdate!({ payload: new Date(data?.user?.expire), field: "expire" })
-                rawStateUpdate!({ payload: user?.pin, field: "pin" })
                 uploadFiles!(data?.user?.files!)
             }
         },
