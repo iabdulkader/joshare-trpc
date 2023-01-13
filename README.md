@@ -1,4 +1,4 @@
-<div align="center"> <img src=https://telegra.ph/file/ec8c9b6084584a62c3c79.png width="200px"/> </div>
+<div align="center"> <a href="https://joshare.xyz"><img src=https://telegra.ph/file/ec8c9b6084584a62c3c79.png width="200px"/></a> </div>
 
 # About
 # JoShare - A simple file sharing solution. Anyone can share any kinds of file with others easily and securely. 
