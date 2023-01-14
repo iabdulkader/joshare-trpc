@@ -1,26 +1,20 @@
 import { FilesAction, FilesActionType, FilesContextType } from "../../types";
 
-export function FilesReducer(state: FilesContextType, action: FilesAction): FilesContextType {
+export function FilesReducer(draft: FilesContextType, action: FilesAction): void {
   switch (action.type) {
     case FilesActionType.UPLOAD_FILES:
-      return {
-        ...state,
-        files: action.payload,
-      };
+       draft.files = action.payload;
+       break;
 
     case FilesActionType.UPLOAD_FILE:
-      return {
-        ...state,
-        files: [...state.files!, action.payload],
-      };
+      draft.files!.push(action.payload);
+      break;
 
     case FilesActionType.DELETE_FILE:
-      return {
-        ...state,
-        files: state.files!.filter((file) => file.id !== action.payload),
-      };
+      draft.files = draft.files!.filter((file) => file.id !== action.payload);
+      break;
 
     default:
-      return state;
+      break;
   }
 }

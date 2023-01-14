@@ -1,6 +1,7 @@
-import { createContext, useReducer } from "react";
+import { createContext } from "react";
 import { FilesReducer } from "./filesReducer";
-import { ActionType, FileType, FilesActionType, FilesContextType, UserKeys, UserValues } from "../../types";
+import { FileType, FilesActionType, FilesContextType } from "../../types";
+import { useImmerReducer } from "use-immer";
 
 const initialState: FilesContextType = {
     files: null,
@@ -9,7 +10,7 @@ const initialState: FilesContextType = {
 export const FilesContext = createContext(initialState);
 
 export default function FilesContextProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(FilesReducer, initialState);
+  const [state, dispatch] = useImmerReducer(FilesReducer, initialState);
 
     const uploadFiles = (files: FileType[] | null) => {
         dispatch({

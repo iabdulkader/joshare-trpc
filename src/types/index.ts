@@ -15,9 +15,8 @@ export interface User {
     rawStateUpdate?: ({ field, payload }: { field: UserKeys, payload: UserValues }) => void,
 }
 
-export type UserValues = User[keyof User];
 export type UserKeys = keyof User;
-
+export type UserValues = User[UserKeys];
 
 export interface FileType {
     id: string;
@@ -28,18 +27,6 @@ export interface FileType {
 }
 
 export type Action =
-    | {
-          type: ActionType.UPDATE_PIN;
-          payload: string;
-      }
-    | {
-          type: ActionType.UPDATE_EXPIRE;
-          payload: Date;
-      }
-    | {
-          type: ActionType.UPDATE_EMAIL_REMAINING;
-          payload: number;
-      }
     | {
           type: ActionType.RAW_UPDATE_STATE;
           field: UserKeys;

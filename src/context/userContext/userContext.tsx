@@ -1,6 +1,7 @@
-import { createContext, useReducer } from "react";
+import { createContext } from "react";
 import UserReducer from "./userReducer";
 import { ActionType, User, UserKeys, UserValues } from "../../types";
+import { useImmerReducer } from "use-immer";
 
 const initialState: User = {
   pin: "",
@@ -12,7 +13,7 @@ const initialState: User = {
 export const UserContext = createContext(initialState);
 
 export default function UserContextProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(UserReducer, initialState);
+  const [state, dispatch] = useImmerReducer(UserReducer, initialState);
 
     const rawStateUpdate = ({ payload, field }: { payload: UserValues, field: UserKeys}) => {
       dispatch({ type: ActionType.RAW_UPDATE_STATE, payload, field });
