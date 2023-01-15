@@ -1,14 +1,17 @@
-import { useContext, useRef } from "react";
+import { Ref, useContext, useRef } from "react";
 import { FilesContext } from "../../context/filesContext/filesContext";
 import { upload } from "../../utlis/upload/uploadFile";
 import { handleFiles } from "../../utlis/upload/handleFiles";
 import FileIcon from "../Icons/FileIcon"
-import ProgressBar from "../ProgessBar/ProgressBar"
+import { nanoid } from 'nanoid';
+import { UserContext } from "../../context/userContext/userContext";
+import { sizeModifier } from "../../utlis/upload/sizeModifier";
 
-export default function UploadBox(){
+export default function UploadBox({ socket }: { socket: Ref<any>}){
     const fileRef = useRef<HTMLInputElement>(null);
     const dragRef = useRef<HTMLDivElement >(null);
-    const { uploadFile } = useContext(FilesContext);
+    const { uploadFile, addFilesToPending } = useContext(FilesContext);
+    const { pin } = useContext(UserContext);
 
     const triggerFile = () => {
         if(fileRef.current){
@@ -37,22 +40,54 @@ export default function UploadBox(){
             dragRef.current.classList.remove("drag");
           }
       }
+
+      const filesArray = (files: any) => {
+        let filesObj: any = {};
+
+        for(let i = 0; i < files.length; i++){
+            let id = nanoid(5);
+            filesObj[id] = {
+                id: id,
+                file: files[i],
+                progress: 0,
+                name: files[i].name,
+                size: sizeModifier(files[i].size),
+                ext: files[i].name.slice((Math.max(0, files[i].name.lastIndexOf(".")) || Infinity) + 1),
+            }
+
+            // arr.push({
+            //     id: nanoid(5),
+            //     file: files[i],
+            //     progress: 0,
+            //     name: files[i].name,
+            //     size: sizeModifier(files[i].size),
+            //     ext: files[i].name.slice((Math.max(0, files[i].name.lastIndexOf(".")) || Infinity) + 1),
+            // });
+        }
+        return filesObj;
+      }
       
       const fileDrop = (e: any) => {
           e.preventDefault();
           if (dragRef.current) {        
             dragRef.current.classList.remove("drag");
           }
+          let files = filesArray(e.dataTransfer.files)
+          
+          addFilesToPending!(files);
 
-          handleFiles(e.dataTransfer.files, uploadFile!)
+          handleFiles(files, socket, pin)
       }
 
       const uploadFiles = (e: any) => {
-        handleFiles(e.target.files, uploadFile!)
+        let files = filesArray(e.target.files)
+        addFilesToPending!(files);
+        
+        handleFiles(files, socket, pin)
       }
 
     return(
-        <div className="w-full px-4 top-[70vh] mb-24 lg:mb-8">
+        <div className="w-full px-4 top-[70vh] mb-2">
            <div className="w-full p-4 flex justify-between items-center bg-secondaryBg-light dark:bg-secondaryBg-dark  rounded-lg">
                 <div 
                     className="w-full h-full border border-dashed border-[#4fa94d] rounded-lg group"
@@ -82,17 +117,7 @@ export default function UploadBox(){
                 </div>
            </div>
 
-           <div className="lg:h-[calc(100vh-30rem)] lg:overflow-y-auto scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-900 scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar-thin
-            ">
-              <ProgressBar />
-              <ProgressBar />
-
-                <div className="group">
-                    <div className="hidden group-[.is-published]:block">
-                        Published
-                    </div>
-                </div>
-           </div>
+           
         </div>
     )
 }

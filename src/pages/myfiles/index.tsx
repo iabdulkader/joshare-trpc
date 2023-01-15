@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo, useRef } from "react";
 import Files from "../../components/Files/Files";
 import MetaHead from "../../components/Head/Head";
 import PinHolder from "../../components/PinHolder/PinHolder";
@@ -10,13 +10,20 @@ import { UserContext } from "../../context/userContext/userContext";
 import { getUser, removeUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 
+import { io, Socket } from "socket.io-client";
+import ProgressBars from "../../components/ProgessBar/ProgressBars";
+
+
 
 export default function MyFiles(){
     trpc.home.isAlive.useQuery();
 
+    const socketRef = useRef<Socket>();
     const router = useRouter();
-    const { uploadFiles } = useContext(FilesContext);
-    const { rawStateUpdate } = useContext(UserContext);
+    const { uploadFiles, uploadFile, updateProgress } = useContext(FilesContext);
+    const { rawStateUpdate, pin } = useContext(UserContext);
+
+    let user = useMemo(() => getUser(), []);
 
     const { mutate } = trpc.user.getUser.useMutation({
         onSuccess: (data) => {
@@ -31,10 +38,23 @@ export default function MyFiles(){
             router.push("/");
         }
     });
+
+    useEffect(() => {
+        socketRef.current = io(`${process.env.NEXT_PUBLIC_FILES_SERVER}`);
+
+        socketRef.current.emit("join", { pin: user?.pin });
+
+        socketRef.current.on("upload-progress", (data: any) => {
+            updateProgress!(data.file, data.id)
+        })
+
+        socketRef.current.on("upload-complete", (data: any) => {
+            uploadFile!(data.file)
+        })
+    }, [user])
     
     
     useEffect(() => {
-        let user = getUser();
 
         if(user === null) {
             router.push("/");
@@ -61,9 +81,14 @@ export default function MyFiles(){
 
 
                 <div className="w-full max-w-[450px] h-full mx-auto lg:mx-0 lg:my-6 lg:mb-20">
-                <Ribbon />
-                <UploadBox />
+                    <Ribbon />
+                    <UploadBox socket={socketRef} />
+
+                    <ProgressBars />
+                    
                 </div>
+
+                
             </div>
         </>       
     )

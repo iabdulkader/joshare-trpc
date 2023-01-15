@@ -1,3 +1,5 @@
+import { Socket } from "socket.io-client";
+
 export enum Path {
     home = "/",
     terms = "/terms",
@@ -23,7 +25,9 @@ export interface FileType {
     name: string;
     ext: string;
     size: string;
-    url: string;
+    url?: string;
+    progress?: number;
+    file?: any;
 }
 
 export type Action =
@@ -47,18 +51,28 @@ export interface emailService {
     expire: Date;
 }
 
+export interface pendingFilesType {
+    [key: string]: FileType;
+}
 
 export interface FilesContextType {
     files: FileType[] | null;
+    pendingFiles: pendingFilesType;
     uploadFiles?: (files: FileType[] | null) => void;
     uploadFile?: (file: FileType) => void;
     deleteFileByID?: (id: string) => void;
+    addFilesToPending?: (files: pendingFilesType) => void;
+    updateProgress?: (file: FileType, id: string) => void;
+    removeFilesFromPending?: (id: string) => void;
 }
 
 export enum FilesActionType {
     UPLOAD_FILES = "UPLOAD_FILES",
     UPLOAD_FILE = "UPLOAD_FILE",
     DELETE_FILE = "DELETE_FILE",
+    UPDATE_PROGRESS = "UPDATE_PROGRESS",
+    ADD_FILES_TO_PENDING = "ADD_FILES_TO_PENDING",
+    REMOVE_FILES_FROM_PENDING = "REMOVE_FILES_FROM_PENDING",
 }
 
 export type FilesAction =
@@ -72,6 +86,19 @@ export type FilesAction =
     }
     | {
           type: FilesActionType.DELETE_FILE;
+          payload: string;
+    }
+    | {
+          type: FilesActionType.UPDATE_PROGRESS;
+          payload: FileType;
+          id: string;
+    }
+    | {
+          type: FilesActionType.ADD_FILES_TO_PENDING;
+          payload: pendingFilesType;
+    }
+    | {
+          type: FilesActionType.REMOVE_FILES_FROM_PENDING;
           payload: string;
     }
     

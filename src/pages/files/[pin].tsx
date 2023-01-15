@@ -37,6 +37,8 @@ export default function Pin(){
     if(pin && (pin?.length < 8 || pin.length > 8 || isNaN(pin as any))){
         router.push("/");
     }
+
+    useEffect(() => {}, [pin])
     
     
     useEffect(() => { 

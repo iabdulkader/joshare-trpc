@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Router } from 'next/router'
 import { Modal } from 'modal-rt'
 import { Toaster } from 'react-hot-toast'
@@ -10,11 +10,14 @@ import Header from '../components/Header/Header'
 
 import { useRouter } from 'next/router'
 import { trpc } from '../utlis/trpc/trpc'
-import UserContextProvider from '../context/userContext/userContext'
+import UserContextProvider, { UserContext } from '../context/userContext/userContext'
 import FilesContextProvider from '../context/filesContext/filesContext'
 
+
+
 function App({ Component, pageProps }: AppProps) {
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
+  const { pin } = useContext(UserContext);
 
   const router = useRouter();
 

@@ -5,13 +5,12 @@ import { upload } from "./uploadFile";
 let promises: any = [];
 const limit = pLimit(3);
 
-export const handleFiles = async (files: any, uploadFile: (file: FileType) => void) => {
+export const handleFiles = async (files: FileType[], socket: any, pin: string) => {
 
-    for(let file of files){
+    for(let key in files){
         
-        promises.push(limit(() => upload(file, uploadFile)));
+        promises.push(limit(() => upload(files[key], socket, pin)));
       }
       
       await Promise.all(promises);
-
 }

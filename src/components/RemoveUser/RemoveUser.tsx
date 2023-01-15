@@ -22,7 +22,7 @@ export default function RemoveUser() {
             </div>
 
             <div className="mt-4">
-                <Button text="Remove User" width={24} height={8} onClick={deleteUser} />
+                <Button text="Remove User" width={30} height={8} onClick={deleteUser} />
             </div>
        </div>
       )

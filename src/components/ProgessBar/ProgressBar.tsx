@@ -1,11 +1,24 @@
+import { useContext } from "react";
 import { FileIcon, defaultStyles } from "react-file-icon";
+import { FilesContext } from "../../context/filesContext/filesContext";
+import { FileType } from "../../types";
 
-export default function ProgressBar() {
-    let progress: number = 37 / 100;
+export default function ProgressBar({ file }: { file: FileType }) {
+    const iconStyles = (defaultStyles as any)[file.ext || "docx"] || {};
+    let progress: number = file.progress! / 100;
+
+    const { removeFilesFromPending } = useContext(FilesContext);
 
     const progressStyle: { transform: string } = {
         transform: `scaleX(${progress})`
       }
+
+    if(progress === 1) {
+        setTimeout(() => {
+            removeFilesFromPending!(file.id)
+        }, 1000)
+    }
+
 
     return (
        <div className="mt-2 w-full bg-secondaryBg-light dark:bg-secondaryBg-dark p-4 rounded-lg">
@@ -20,7 +33,7 @@ export default function ProgressBar() {
 
                <div className="absolute top-0 left-0 flex h-full w-full">
                  <div className="h-[18px] w-[18px] my-auto ml-3">
-                    <FileIcon {...defaultStyles[ "docx"]}/>
+                 <FileIcon extension={file.ext} {...iconStyles} key={file.id} />
                  </div>
 
                  <div className='ml-3 flex-col flex justify-center h-full w-full flex-grow-1'>
@@ -28,7 +41,7 @@ export default function ProgressBar() {
                     className="bg-transparent w-full text-sm border-none outline-none" 
                     type="text" 
                     name="" 
-                    value={"file.jpg"} 
+                    value={file.name} 
                     readOnly 
                     />
 
@@ -36,7 +49,7 @@ export default function ProgressBar() {
                     className="bg-transparent w-full text-[10px] border-none outline-none font-light text-slate-600 dark:text-slate-300" 
                     type="text" 
                     name="" 
-                    value={"5.3MB"} 
+                    value={file.size} 
                     readOnly />
                 </div>
 

@@ -25,7 +25,7 @@ export default function File({ file }: { file: FileType}){
     const deleteFile = () => {
       mutate({ 
         id: file.id, 
-        url: file.url 
+        url: file.url! 
       })
     }
 

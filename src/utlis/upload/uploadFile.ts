@@ -1,13 +1,13 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
-import { nanoid } from 'nanoid';
 import { FileType } from '../../types';
 
 
-export const upload = async (file: File, uploadFile: (file: FileType) => void) => {
+export const upload = async (file: FileType, socket: any, pin: string) => {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('fileId', nanoid(5));
+    formData.append('file', file.file);
+    formData.append('fileId', file.id);
+
 
     axios.request({
         method: "post", 
@@ -17,10 +17,22 @@ export const upload = async (file: File, uploadFile: (file: FileType) => void) =
             "x-authorization": `Bearer ${cookie.get('token')}`,
         },
         onUploadProgress: (p) => {
-          console.log("progress", p.loaded / p.total!); 
-        }
+          socket.current.emit('upload-progress', {
+            pin,
+            id: file.id,
+            file: {
+                id: file.id,
+                progress: Math.round((p.loaded / p.total!) * 100),
+                name: file.name,
+                ext: file.ext,
+                size: file.size,
+            }
+        })}
     }).then (data => {
-        uploadFile!(data.data.data)
+        socket.current.emit('upload-complete', {
+            pin,
+            file: data?.data?.data as FileType,
+        })
     })
    
 };

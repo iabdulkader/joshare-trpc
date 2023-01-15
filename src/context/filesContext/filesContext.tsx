@@ -1,10 +1,11 @@
 import { createContext } from "react";
 import { FilesReducer } from "./filesReducer";
-import { FileType, FilesActionType, FilesContextType } from "../../types";
+import { FileType, FilesActionType, FilesContextType, pendingFilesType } from "../../types";
 import { useImmerReducer } from "use-immer";
 
 const initialState: FilesContextType = {
     files: null,
+    pendingFiles: {},
 };
 
 export const FilesContext = createContext(initialState);
@@ -32,12 +33,38 @@ export default function FilesContextProvider({ children }: { children: React.Rea
             payload: id,
         });
     };
+
+    const addFilesToPending = (files: pendingFilesType) => {
+        dispatch({
+            type: FilesActionType.ADD_FILES_TO_PENDING,
+            payload: files,
+        });
+    };
+
+    const removeFilesFromPending = (id: string) => {
+        dispatch({
+            type: FilesActionType.REMOVE_FILES_FROM_PENDING,
+            payload: id,
+        });
+    };
+    
+    const updateProgress = (file: FileType, id: string) => {
+        dispatch({
+            type: FilesActionType.UPDATE_PROGRESS,
+            payload: file,
+            id
+        });
+    };
   
     let value = {
         files: state.files,
+        pendingFiles: state.pendingFiles,
         uploadFiles,
         uploadFile,
         deleteFileByID,
+        addFilesToPending,
+        updateProgress,
+        removeFilesFromPending
     };
     
     return (
