@@ -41,7 +41,7 @@ export default function MyFiles(){
     });
 
     useEffect(() => {
-        socketRef.current = io(`${process.env.NEXT_PUBLIC_FILES_SERVER}`, { path: "/socket"});
+        socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket/" });
 
         socketRef.current.emit("join", { pin: user?.pin });
 
