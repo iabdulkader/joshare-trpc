@@ -51,17 +51,17 @@ export interface emailService {
     expire: Date;
 }
 
-export interface pendingFilesType {
+export interface FilesType {
     [key: string]: FileType;
 }
 
 export interface FilesContextType {
-    files: FileType[] | null;
-    pendingFiles: pendingFilesType;
+    files: FilesType | null;
+    pendingFiles: FilesType;
     uploadFiles?: (files: FileType[] | null) => void;
     uploadFile?: (file: FileType) => void;
     deleteFileByID?: (id: string) => void;
-    addFilesToPending?: (files: pendingFilesType) => void;
+    addFilesToPending?: (files: FilesType) => void;
     updateProgress?: (file: FileType, id: string) => void;
     removeFilesFromPending?: (id: string) => void;
 }
@@ -95,7 +95,7 @@ export type FilesAction =
     }
     | {
           type: FilesActionType.ADD_FILES_TO_PENDING;
-          payload: pendingFilesType;
+          payload: FilesType;
     }
     | {
           type: FilesActionType.REMOVE_FILES_FROM_PENDING;

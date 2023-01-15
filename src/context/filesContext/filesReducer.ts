@@ -1,17 +1,39 @@
+import { FileType } from './../../types/index';
 import { FilesAction, FilesActionType, FilesContextType } from "../../types";
 
 export function FilesReducer(draft: FilesContextType, action: FilesAction) {
+
   switch (action.type) {
-    case FilesActionType.UPLOAD_FILES:
-       draft.files = action.payload;
+    case FilesActionType.UPLOAD_FILES:    
+       if(action.payload){
+          draft.files! = {
+            ...draft.files,
+            ...action.payload!.reduce((acc: any, file: FileType) => {
+              acc[file.id] = file;
+              return acc;
+            }
+            , {})
+          }
+          
+          break;
+      } else {
+        draft.files = action.payload;
+      }
        break;
 
     case FilesActionType.UPLOAD_FILE:
-      draft.files!.push(action.payload);
+      draft.files![action.payload.id] = action.payload;
       break;
 
     case FilesActionType.DELETE_FILE:
-      draft.files = draft.files!.filter((file) => file.id !== action.payload);
+      delete draft.files![action.payload];
+      break;
+
+    case FilesActionType.ADD_FILES_TO_PENDING:
+      draft.pendingFiles! = {
+        ...draft.pendingFiles,
+        ...action.payload,
+      }
       break;
 
     case FilesActionType.UPDATE_PROGRESS:
@@ -22,14 +44,6 @@ export function FilesReducer(draft: FilesContextType, action: FilesAction) {
           ...draft.pendingFiles,
           [action.id]: action.payload,
         }
-      }
-
-      break;
-
-    case FilesActionType.ADD_FILES_TO_PENDING:
-      draft.pendingFiles! = {
-        ...draft.pendingFiles,
-        ...action.payload,
       }
       break;
 

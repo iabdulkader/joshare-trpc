@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { FilesReducer } from "./filesReducer";
-import { FileType, FilesActionType, FilesContextType, pendingFilesType } from "../../types";
+import { FileType, FilesActionType, FilesContextType, FilesType } from "../../types";
 import { useImmerReducer } from "use-immer";
 
 const initialState: FilesContextType = {
@@ -34,7 +34,7 @@ export default function FilesContextProvider({ children }: { children: React.Rea
         });
     };
 
-    const addFilesToPending = (files: pendingFilesType) => {
+    const addFilesToPending = (files: FilesType) => {
         dispatch({
             type: FilesActionType.ADD_FILES_TO_PENDING,
             payload: files,

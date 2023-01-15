@@ -19,10 +19,12 @@ export default function Files(){
                     </div>
                 )
               }
-
-              {files && files.map((file, index) => (
-                  <File key={file.id} file={file} />
-                ))}
+              {
+                files && Object.keys(files).map((key) => (
+                    <File key={key} file={files[key]} />
+                ))
+              }
+                
         </div>
     )
 }
