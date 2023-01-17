@@ -41,7 +41,7 @@ export default function MyFiles(){
     });
 
     useEffect(() => {
-        socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports: ["websocket"] });
+        socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
         // socketRef.current = io('http://localhost:8000');
 
         socketRef.current.emit("join", { pin: user?.pin });
