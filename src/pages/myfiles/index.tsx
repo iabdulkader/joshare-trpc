@@ -47,10 +47,12 @@ export default function MyFiles(){
         socketRef.current.emit("join", { pin: user?.pin });
 
         socketRef.current.on("upload-progress", (data: any) => {
+            console.log("upload-progress", data);
             updateProgress!(data.file, data.id)
         })
 
         socketRef.current.on("upload-complete", (data: any) => {
+            console.log("upload-complete", data);
             uploadFile!(data.file)
         })
     }, [user])
