@@ -1,6 +1,5 @@
-import { Ref, useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { FilesContext } from "../../context/filesContext/filesContext";
-import { upload } from "../../utlis/upload/uploadFile";
 import { handleFiles } from "../../utlis/upload/handleFiles";
 import FileIcon from "../Icons/FileIcon"
 import { nanoid } from 'nanoid';
@@ -11,7 +10,7 @@ import { SocketContext } from "../../context/socketContext/SocketContext";
 export default function UploadBox(){
     const fileRef = useRef<HTMLInputElement>(null);
     const dragRef = useRef<HTMLDivElement >(null);
-    const { uploadFile, addFilesToPending } = useContext(FilesContext);
+    const { addFilesToPending } = useContext(FilesContext);
     const { pin } = useContext(UserContext);
     const { socket } = useContext(SocketContext);
 
@@ -56,15 +55,6 @@ export default function UploadBox(){
                 size: sizeModifier(files[i].size),
                 ext: files[i].name.slice((Math.max(0, files[i].name.lastIndexOf(".")) || Infinity) + 1),
             }
-
-            // arr.push({
-            //     id: nanoid(5),
-            //     file: files[i],
-            //     progress: 0,
-            //     name: files[i].name,
-            //     size: sizeModifier(files[i].size),
-            //     ext: files[i].name.slice((Math.max(0, files[i].name.lastIndexOf(".")) || Infinity) + 1),
-            // });
         }
         return filesObj;
       }

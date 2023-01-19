@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect, useMemo, useRef } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Files from "../../components/Files/Files";
 import MetaHead from "../../components/Head/Head";
 import PinHolder from "../../components/PinHolder/PinHolder";
@@ -10,20 +10,17 @@ import { UserContext } from "../../context/userContext/userContext";
 import { getUser, removeUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 
-import { io, Socket } from "socket.io-client";
 import ProgressBars from "../../components/ProgessBar/ProgressBars";
-import { SocketContext } from "../../context/socketContext/SocketContext";
+
 
 
 
 export default function MyFiles(){
     trpc.home.isAlive.useQuery();
 
-    const socketRef = useRef<Socket>();
     const router = useRouter();
-    const { uploadFiles, uploadFile, updateProgress } = useContext(FilesContext);
+    const { uploadFiles } = useContext(FilesContext);
     const { rawStateUpdate, pin } = useContext(UserContext);
-    const { socket } = useContext(SocketContext);
 
     let user = useMemo(() => getUser(), []);
 
@@ -41,21 +38,6 @@ export default function MyFiles(){
             router.push("/");
         }
     });
-
-   
-
-    // socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
-
-    // socketRef.current!.emit("join", { pin: user?.pin });
-
-    useEffect(() => {
-        if(socket){
-            socket.on("upload-progress", (data) => {
-                // updateProgress!(data);
-                console.log(data);
-            })
-        }
-    }, [socket])
     
     
     useEffect(() => {
