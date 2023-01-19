@@ -40,25 +40,31 @@ export default function MyFiles(){
         }
     });
 
+    socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
     useEffect(() => {
-        socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
         // socketRef.current = io('http://localhost:8000');
         
-            socketRef.current.on("connect", () => {
-                console.log("connected");
-            socketRef.current!.emit("join", { pin: user?.pin });
-
-            socketRef.current!.on("upload-progress", (data: any) => {
-                console.log("upload-progress", data);
-                updateProgress!(data.file, data.id)
-            })
-
-            socketRef.current!.on("upload-complete", (data: any) => {
-                console.log("upload-complete", data);
-                uploadFile!(data.file)
-            })
-       })
+            
     }, [user])
+
+   if(socketRef.current){
+    socketRef.current.on("connect", () => {
+        console.log("connected");
+        socketRef.current!.emit("join", { pin: user?.pin });
+
+        
+})
+
+    socketRef.current!.on("upload-progress", (data: any) => {
+        console.log("upload-progress", data);
+        updateProgress!(data.file, data.id)
+    })
+
+    socketRef.current!.on("upload-complete", (data: any) => {
+        console.log("upload-complete", data);
+        uploadFile!(data.file)
+    })
+}
     
     
     useEffect(() => {
