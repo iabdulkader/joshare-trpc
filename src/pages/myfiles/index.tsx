@@ -12,6 +12,7 @@ import { trpc } from "../../utlis/trpc/trpc";
 
 import { io, Socket } from "socket.io-client";
 import ProgressBars from "../../components/ProgessBar/ProgressBars";
+import { SocketContext } from "../../context/socketContext/SocketContext";
 
 
 
@@ -22,6 +23,7 @@ export default function MyFiles(){
     const router = useRouter();
     const { uploadFiles, uploadFile, updateProgress } = useContext(FilesContext);
     const { rawStateUpdate, pin } = useContext(UserContext);
+    const { socket } = useContext(SocketContext);
 
     let user = useMemo(() => getUser(), []);
 
@@ -40,31 +42,20 @@ export default function MyFiles(){
         }
     });
 
-    socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
+   
+
+    // socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
+
+    // socketRef.current!.emit("join", { pin: user?.pin });
+
     useEffect(() => {
-        // socketRef.current = io('http://localhost:8000');
-        
-            
-    }, [user])
-
-   if(socketRef.current){
-    socketRef.current!.on("connect", () => {
-        console.log("connected");
-        socketRef.current!.emit("join", { pin: user?.pin });
-
-        
-})
-    
-    socketRef.current!.on("upload-progress", (data: any) => {
-        console.log("upload-progress", data);
-        updateProgress!(data.file, data.id)
-    })
-
-    socketRef.current!.on("upload-complete", (data: any) => {
-        console.log("upload-complete", data);
-        uploadFile!(data.file)
-    })
-}
+        if(socket){
+            socket.on("upload-progress", (data) => {
+                // updateProgress!(data);
+                console.log(data);
+            })
+        }
+    }, [socket])
     
     
     useEffect(() => {
@@ -95,7 +86,7 @@ export default function MyFiles(){
 
                 <div className="w-full max-w-[450px] h-full mx-auto lg:mx-0 lg:my-6 lg:mb-20">
                     <Ribbon />
-                    <UploadBox socket={socketRef} />
+                    <UploadBox />
 
                     <ProgressBars />
                     

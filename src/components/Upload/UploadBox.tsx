@@ -6,12 +6,14 @@ import FileIcon from "../Icons/FileIcon"
 import { nanoid } from 'nanoid';
 import { UserContext } from "../../context/userContext/userContext";
 import { sizeModifier } from "../../utlis/upload/sizeModifier";
+import { SocketContext } from "../../context/socketContext/SocketContext";
 
-export default function UploadBox({ socket }: { socket: Ref<any>}){
+export default function UploadBox(){
     const fileRef = useRef<HTMLInputElement>(null);
     const dragRef = useRef<HTMLDivElement >(null);
     const { uploadFile, addFilesToPending } = useContext(FilesContext);
     const { pin } = useContext(UserContext);
+    const { socket } = useContext(SocketContext);
 
     const triggerFile = () => {
         if(fileRef.current){

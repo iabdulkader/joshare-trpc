@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Router } from 'next/router'
 import { Modal } from 'modal-rt'
 import { Toaster } from 'react-hot-toast'
@@ -10,14 +10,15 @@ import Header from '../components/Header/Header'
 
 import { useRouter } from 'next/router'
 import { trpc } from '../utlis/trpc/trpc'
-import UserContextProvider, { UserContext } from '../context/userContext/userContext'
+import UserContextProvider from '../context/userContext/userContext'
 import FilesContextProvider from '../context/filesContext/filesContext'
+import SocketContextProvider from '../context/socketContext/SocketContext'
 
 
 
 function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState<boolean>(false);
-  const { pin } = useContext(UserContext);
+
 
   const router = useRouter();
 
@@ -34,6 +35,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
       <UserContextProvider>
         <FilesContextProvider>
+          <SocketContextProvider>
           <Header path={router.pathname} />
 
           { loading ?
@@ -44,6 +46,7 @@ function App({ Component, pageProps }: AppProps) {
           <Modal />
           <Toaster />
           <Footer />
+          </SocketContextProvider>
         </FilesContextProvider>
       </UserContextProvider>
       )

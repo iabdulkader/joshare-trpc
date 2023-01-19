@@ -17,9 +17,11 @@ export const upload = async (file: FileType, socket: any, pin: string) => {
             "x-authorization": `Bearer ${cookie.get('token')}`,
         },
         onUploadProgress: (p) => {
-            socket.current.on("connect", () => {
 
-                socket.current.emit('upload-progress', {
+
+                // socket.current!.emit("join", { pin });
+
+                socket.emit('upload-progress', {
                     pin,
                     id: file.id,
                     file: {
@@ -30,11 +32,11 @@ export const upload = async (file: FileType, socket: any, pin: string) => {
                         size: file.size,
                     }
                 })
-            })
+            
 
           }
     }).then (data => {
-        socket.current.emit('upload-complete', {
+        socket.emit('upload-complete', {
             pin,
             file: data?.data?.data as FileType,
         })
