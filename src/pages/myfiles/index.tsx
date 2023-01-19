@@ -44,18 +44,20 @@ export default function MyFiles(){
         socketRef.current = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
         // socketRef.current = io('http://localhost:8000');
         
-        console.log("socketRef.current", socketRef.current)
-        socketRef.current.emit("join", { pin: user?.pin });
+            socketRef.current.on("connect", () => {
+                console.log("connected");
+            socketRef.current!.emit("join", { pin: user?.pin });
 
-        socketRef.current.on("upload-progress", (data: any) => {
-            console.log("upload-progress", data);
-            updateProgress!(data.file, data.id)
-        })
+            socketRef.current!.on("upload-progress", (data: any) => {
+                console.log("upload-progress", data);
+                updateProgress!(data.file, data.id)
+            })
 
-        socketRef.current.on("upload-complete", (data: any) => {
-            console.log("upload-complete", data);
-            uploadFile!(data.file)
-        })
+            socketRef.current!.on("upload-complete", (data: any) => {
+                console.log("upload-complete", data);
+                uploadFile!(data.file)
+            })
+       })
     }, [user])
     
     
