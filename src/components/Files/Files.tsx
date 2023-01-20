@@ -3,7 +3,7 @@ import { FallingLines } from "react-loader-spinner";
 import { FilesContext } from "../../context/filesContext/filesContext";
 import File from "./File";
 
-export default function Files(){
+export default function Files({ auth = true }: { auth?: boolean }){
     const { files } = useContext(FilesContext);
     
     return(
@@ -20,9 +20,15 @@ export default function Files(){
                 )
               }
               {
-                files && Object.keys(files).map((key) => (
-                    <File key={key} file={files[key]} />
-                ))
+                files && Object.keys(files).map((key) => {
+                    if(auth){
+                        if(!('progress' in files[key])){
+                            return <File key={key} file={files[key]} />
+                        }
+                    } else {
+                        return <File key={key} auth={auth} file={files[key]} />
+                    }
+                })
               }
                 
         </div>

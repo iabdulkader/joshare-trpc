@@ -16,7 +16,7 @@ export const SocketContext = createContext(initialState);
 export default function SocketContextProvider({ children }: { children: React.ReactNode }) {
 
     const { pin } = useContext(UserContext);
-    const { uploadFile, updateProgress } = useContext(FilesContext);
+    const { uploadFile, updateProgress, deleteFileByID } = useContext(FilesContext);
 
 
     useEffect(() => {
@@ -28,12 +28,19 @@ export default function SocketContextProvider({ children }: { children: React.Re
             initialState.socket.on("connect", () => {
 
                 initialState.socket!.on("upload-progress", (data) => {
+                    console.log(data)
                     updateProgress!(data.file, data.id);
 
                 })
 
                 initialState.socket!.on("upload-complete", (data) => {
+                    console.log(data)
                     uploadFile!(data.file);
+                })
+
+                initialState.socket!.on("delete-file", (data) => {
+                    console.log(data)
+                    deleteFileByID!(data.id)
                 })
         
             })

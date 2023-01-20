@@ -7,17 +7,20 @@ import { FilesContext } from '../../context/filesContext/filesContext';
 import ButtonWithIcon from '../Button/ButtonWithIcon';
 import Link from 'next/link';
 import { UserContext } from '../../context/userContext/userContext';
+import { SocketContext } from '../../context/socketContext/SocketContext';
 
-export default function File({ file }: { file: FileType}){
+export default function File({ file, auth = true }: { file: FileType, auth?: boolean}){
     const iconStyles = (defaultStyles as any)[file.ext || "docx"] || {};
     const { deleteFileByID } = useContext(FilesContext);
     const { pin } = useContext(UserContext);
+    const { socket } = useContext(SocketContext);
     
 
     const { mutate, isLoading } = trpc.files.deleteFile.useMutation({
       onSuccess: (data) => {
         if(data.id){
           deleteFileByID!(data.id)
+          socket!.emit("delete-file", { id: data.id, pin: pin! })
         }
       }
     })
@@ -27,6 +30,7 @@ export default function File({ file }: { file: FileType}){
         id: file.id, 
         url: file.url! 
       })
+
     }
 
 
@@ -57,15 +61,28 @@ export default function File({ file }: { file: FileType}){
 
               <div className='ml-3 flex items-center gap-3 mr-4'>
 
-                <ButtonWithIcon loading={isLoading}>
-                  <AiOutlineDelete className='cursor-pointer' onClick={deleteFile} />  
-                </ButtonWithIcon>
+                {
+                  "progress" in file ? (
+                    <p>{file.progress}</p>
+                  ) : (
+                  <>
+                    { auth && (<ButtonWithIcon loading={isLoading}>
+                                  <AiOutlineDelete className='cursor-pointer' onClick={deleteFile} />  
+                              </ButtonWithIcon>)
+                    }
 
-                <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?pin=${pin}`}>
-                  <AiOutlineDownload 
-                    className='cursor-pointer'
-                  />
-                </Link>
+                    <Link href={`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/download/${file.id}?pin=${pin}`}>
+                      <AiOutlineDownload 
+                        className='cursor-pointer'
+                      />
+                    </Link>
+                  </>
+                  )
+                    
+
+                }
+
+                
               </div>
             </div>
         </div>

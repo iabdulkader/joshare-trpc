@@ -57,7 +57,7 @@ export default function Pin(){
             <div className="flex flex-col lg:flex-row mt-16">
                 <div className="w-full max-w-[450px] h-full mx-auto my-3 mb-20 lg:mt-6">
                     <PinHolder />
-                    <Files />
+                    <Files auth={false} />
                 </div>
             </div>
         </>
