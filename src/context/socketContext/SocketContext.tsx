@@ -22,24 +22,21 @@ export default function SocketContextProvider({ children }: { children: React.Re
     useEffect(() => {
         
         if(pin){
-            initialState.socket = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket" });
+            initialState.socket = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports : ['websocket'] });
             initialState.socket.emit("join", { pin });
 
             initialState.socket.on("connect", () => {
 
                 initialState.socket!.on("upload-progress", (data) => {
-                    console.log(data)
                     updateProgress!(data.file, data.id);
 
                 })
 
                 initialState.socket!.on("upload-complete", (data) => {
-                    console.log(data)
                     uploadFile!(data.file);
                 })
 
                 initialState.socket!.on("delete-file", (data) => {
-                    console.log(data)
                     deleteFileByID!(data.id)
                 })
         
