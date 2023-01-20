@@ -57,7 +57,6 @@ export interface FilesType {
 
 export interface FilesContextType {
     files: FilesType | null;
-    pendingFiles: FilesType;
     uploadFiles?: (files: FileType[] | null) => void;
     uploadFile?: (file: FileType) => void;
     deleteFileByID?: (id: string) => void;
