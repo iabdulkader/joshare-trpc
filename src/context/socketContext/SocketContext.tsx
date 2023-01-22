@@ -41,10 +41,6 @@ export default function SocketContextProvider({ children }: { children: React.Re
                 })
         
             })
-
-            return () => {
-                socketState.socket!.disconnect();
-            }
         }
         
     }, [pin, socketState.socket])
