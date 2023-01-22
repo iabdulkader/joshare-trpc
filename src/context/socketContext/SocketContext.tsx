@@ -7,11 +7,11 @@ type SocketContext = {
     socket: Socket | null;
 }
 
-let initialState: SocketContext = {
+let socketState: SocketContext = {
     socket: null,
 }
 
-export const SocketContext = createContext(initialState);
+export const SocketContext = createContext(socketState);
 
 export default function SocketContextProvider({ children }: { children: React.ReactNode }) {
 
@@ -22,38 +22,38 @@ export default function SocketContextProvider({ children }: { children: React.Re
     useEffect(() => {
         
         if(pin){
-            initialState.socket = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports : ['websocket'] });
-            initialState.socket.emit("join", { pin });
+            socketState.socket = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports : ['websocket'] });
+            socketState.socket.emit("join", { pin });
 
-            initialState.socket.on("connect", () => {
+            socketState.socket.on("connect", () => {
 
-                initialState.socket!.on("upload-progress", (data) => {
+                socketState.socket!.on("upload-progress", (data) => {
                     updateProgress!(data.file, data.id);
 
                 })
 
-                initialState.socket!.on("upload-complete", (data) => {
+                socketState.socket!.on("upload-complete", (data) => {
                     uploadFile!(data.file);
                 })
 
-                initialState.socket!.on("delete-file", (data) => {
+                socketState.socket!.on("delete-file", (data) => {
                     deleteFileByID!(data.id)
                 })
         
             })
 
             return () => {
-                initialState.socket!.disconnect();
+                socketState.socket!.disconnect();
             }
         }
         
-    }, [pin, initialState.socket])
+    }, [pin, socketState.socket])
 
     
 
     
     return (
-        <SocketContext.Provider value={initialState}>
+        <SocketContext.Provider value={socketState}>
             {children}
         </SocketContext.Provider>)
 }
