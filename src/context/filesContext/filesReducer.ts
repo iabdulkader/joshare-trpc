@@ -40,10 +40,7 @@ export function FilesReducer(draft: FilesContextType, action: FilesAction) {
       if(draft.files![action.id]){
         draft.files![action.id]!.progress = action.payload!.progress;
       } else {
-        draft.files! = {
-          ...draft.files,
-          [action.id]: action.payload,
-        }
+        draft.files![action.id] = action.payload
       }
       break;
 
