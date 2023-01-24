@@ -12,13 +12,13 @@ export default function About() {
         </Head>
 
         <Layout>
-          <div className=" h-full w-full text-center">
+          <div className="h-full w-full text-center">
             <h1 className="utility-header">About</h1>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-6">
 
-              <div className="grid grid-cols-1 max-w-[1000px] lg:grid-cols-2 gap-6 px-8">
-                <div className="text-start ml-5 mb-6 max-w-[450px]">
+              <div className="columns-1 max-w-[1000px] lg:columns-2 gap-6 px-8">
+                <div className="text-start ml-5 mb-6 max-w-[450px] lg:break-inside-avoid">
                   <h1 className="utility-sub-header">What is joShare ?</h1>
                   <p className="text-sm">joShare is a micro file sharing platform. Now what do I mean by micro file sharing??</p>
                   <br />
@@ -26,7 +26,7 @@ export default function About() {
                   
                 </div>
 
-                <div className="text-start ml-5 mb-6 max-w-[450px]">
+                <div className="text-start ml-5 mb-6 max-w-[450px] lg:break-inside-avoid">
                   <h1 className="utility-sub-header">Why joShare ?</h1>
                   <p className="text-sm">Because joShare is very portable, light-weight and easy to use tool.</p>
                   <br />
@@ -36,7 +36,7 @@ export default function About() {
                   
                 </div>
 
-                <div className="text-start ml-5 mb-6 max-w-[450px]">
+                <div className="text-start ml-5 mb-6 max-w-[450px] lg:break-inside-avoid">
                   <h1 className="utility-sub-header">Advances of joShare.</h1>
                   <p className="text-sm">As we discussed before, with joShare you can share files with anybody. Also you will get some other facilities.</p>
                   <br />
@@ -48,7 +48,7 @@ export default function About() {
 
                 </div>
 
-                <div className="text-start ml-5 mb-6 max-w-[450px]">
+                <div className="text-start ml-5 mb-6 max-w-[450px] lg:break-inside-avoid">
                   <h1 className="utility-sub-header">Caution !</h1>
                   <p className="text-sm">Do not upload sensitive files. Don't upload copyrighted contents. We can't guarantee any uncaught error or server crash.</p>
                   <br />
