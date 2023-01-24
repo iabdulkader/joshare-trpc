@@ -8,42 +8,46 @@ type SocketContext = {
 }
 
 let socketState: SocketContext = {
-    socket: null,
+    socket: io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports : ['websocket'] }),
 }
 
 export const SocketContext = createContext(socketState);
 
 export default function SocketContextProvider({ children }: { children: React.ReactNode }) {
-
+ 
     const { pin } = useContext(UserContext);
     const { uploadFile, updateProgress, deleteFileByID } = useContext(FilesContext);
-
-
+    
+    
     useEffect(() => {
+        let socket = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports : ['websocket'] })
+
+        if(pin) {
+            socket!.emit("join", { pin });
+        }
+        socket.on("upload-progress", (data) => {
+            updateProgress!(data.file, data.id);
+        })
+
+        socket.on("upload-complete", (data) => {
+            uploadFile!(data.file);
+        })
         
-        if(pin){
-            socketState.socket = io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports : ['websocket'] });
-            socketState.socket.emit("join", { pin });
+        socket.on("delete-file", (data) => {
+            deleteFileByID!(data.id)
+        })
 
-            socketState.socket.on("connect", () => {
 
-                socketState.socket!.on("upload-progress", (data) => {
-                    updateProgress!(data.file, data.id);
-
-                })
-
-                socketState.socket!.on("upload-complete", (data) => {
-                    uploadFile!(data.file);
-                })
-
-                socketState.socket!.on("delete-file", (data) => {
-                    deleteFileByID!(data.id)
-                })
-        
-            })
+        return () => {
+                if(socket){
+                    socket.off("connect");
+                    socket.off("upload-progress");
+                    socket.off("upload-complete");
+                    socket.off("delete-file");
+                }
         }
         
-    }, [pin, socketState.socket])
+    }, [pin])
 
     
 
