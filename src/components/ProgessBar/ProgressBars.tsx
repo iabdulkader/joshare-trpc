@@ -8,7 +8,7 @@ export default function ProgressBars() {
     return (
         <div className="w-full lg:h-[calc(100vh-30rem)] lg:overflow-y-auto scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-900 scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar-thin mb-24 lg:mb-4 px-4">
 
-            <div className="bg-secondaryBg-light dark:bg-secondaryBg-dark p-4 rounded-lg flex flex-col gap-4">
+            <div className="bg-secondaryBg-light dark:bg-secondaryBg-dark rounded-lg">
 
                 {files && Object.keys(files).map((key) => {
                     if('progress' in files[key]){

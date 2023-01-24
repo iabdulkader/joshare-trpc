@@ -21,6 +21,7 @@ export default function ProgressBar({ file }: { file: FileType }) {
 
 
     return (
+       <div className="w-full px-4 pt-4 last:pb-4">
             <div className="border border-slate-400 dark:border-slate-500 rounded-lg h-14 relative overflow-hidden">
 
                <div 
@@ -65,5 +66,6 @@ export default function ProgressBar({ file }: { file: FileType }) {
                </div>
 
             </div>
+       </div>
       )
 }
