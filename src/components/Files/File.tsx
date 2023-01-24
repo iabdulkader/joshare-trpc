@@ -35,7 +35,7 @@ export default function File({ file, auth = true }: { file: FileType, auth?: boo
 
 
     return(
-        <div className="mb-2 w-full flex justify-center">
+        <div className="file_animate mb-2 w-full flex justify-center transition-all duration-500">
             <div className="w-full bg-secondaryBg-light dark:bg-secondaryBg-dark flex py-3 rounded-lg hover:bg-stone-300 hover:dark:bg-slate-700 duration-300 transition-all">
 
               <div className='ml-4 flex items-center h-[22px] w-[22px] my-auto'>

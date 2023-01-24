@@ -18,10 +18,25 @@
     }
 
     .button{
-      @apply text-sm border border-bg-dark dark:border-bg-light rounded-md hover:bg-bg-dark hover:dark:bg-bg-light hover:text-slate-50 dark:hover:text-slate-900 transition-all duration-300 ease-in-out
+      @apply text-sm border border-bg-dark dark:border-bg-light rounded-md hover:bg-bg-dark hover:dark:bg-bg-light hover:text-slate-50 dark:hover:text-slate-900 transition-all duration-300 ease-in-out hover:scale-110
     }
 
     .modal-container{
       @apply bg-secondaryBg-light dark:bg-secondaryBg-dark w-full max-w-[400px] px-8 pb-12 pt-16 flex flex-col items-center rounded-lg shadow-lg text-sm
     }
   }
+
+.file_animate{
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
