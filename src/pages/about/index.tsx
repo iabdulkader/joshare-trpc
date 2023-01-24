@@ -1,9 +1,16 @@
+import Head from "next/head";
 import Link from "next/link";
 import { FiGithub, FiTwitter } from "react-icons/fi";
 import Layout from "../../components/Layout/Layout";
 
+
 export default function About() {
     return (
+      <>
+        <Head>
+          <title>About | JoShare</title>
+        </Head>
+
         <Layout>
           <div className=" h-full w-full text-center">
             <h1 className="utility-header">About</h1>
@@ -69,5 +76,6 @@ export default function About() {
 
           </div>
         </Layout>
+        </>
       )
 }
