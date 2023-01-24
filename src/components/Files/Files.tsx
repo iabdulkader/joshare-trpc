@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { FallingLines } from "react-loader-spinner";
 import { FilesContext } from "../../context/filesContext/filesContext";
 import File from "./File";
+import NoFile from "./NoFile";
 
 export default function Files({ auth = true }: { auth?: boolean }){
     const { files } = useContext(FilesContext);
@@ -21,7 +22,7 @@ export default function Files({ auth = true }: { auth?: boolean }){
                 )
               }
               {
-                files && Object.keys(files).map((key) => {
+                files && Object.keys(files).map((key) => {       
                     if(auth){
                         if(!('progress' in files[key])){
                             return <File key={key} file={files[key]} />
@@ -31,6 +32,12 @@ export default function Files({ auth = true }: { auth?: boolean }){
                     }
                 })
               }
+
+              {files && (Object.keys(files).length === 0) && (
+                <div className="w-full">
+                    <NoFile />
+                </div>
+              )}
                 
         </div>
     )
