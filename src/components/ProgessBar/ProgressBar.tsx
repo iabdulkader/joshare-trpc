@@ -53,8 +53,8 @@ export default function ProgressBar({ file }: { file: FileType }) {
                     readOnly />
                 </div>
 
-                <div className='flex items-center mr-3 w-12'>
-                    <p className="text-xs ">{progress * 100} %</p>
+                <div className='flex items-center ml-3 mr-3 w-12'>
+                    <p className="text-xs ">{file.progress!} %</p>
                 </div>
 
                 <div 
