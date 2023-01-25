@@ -33,6 +33,10 @@
     .utility-sub-header{
       @apply text-2xl mb-3
     }
+
+    .dot{
+      @apply text-red-500 dark:text-red-cyan-500
+    }
   }
 
 .file_animate{
