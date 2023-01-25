@@ -28,14 +28,18 @@
 
 
     .utility-header{
-      @apply text-3xl mb-8
+      @apply text-3xl mb-8 font-extrabold relative before:w-full before:h-[0.1rem] before:block before:bg-red-400 before:rounded before:mb-2 before:dark:bg-cyan-500 before:absolute before:top-10 before:left-0
     }
     .utility-sub-header{
-      @apply text-2xl mb-3
+      @apply text-2xl mb-3 font-bold
+    }
+
+    .utility-option-header{
+      @apply text-xl mb-2 font-medium
     }
 
     .dot{
-      @apply text-red-500 dark:text-red-cyan-500
+      @apply text-red-400 dark:text-cyan-500 font-extrabold
     }
   }
 

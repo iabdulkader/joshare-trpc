@@ -13,7 +13,7 @@ export default function About() {
 
         <Layout>
           <div className="h-full w-full text-center">
-            <h1 className="utility-header">About<span className="dot">.</span></h1>
+            <div className="flex flex-col items-center"><h1 className="utility-header">About <span className="dot">.</span></h1></div>
 
             <div className="flex justify-center mb-6">
 
