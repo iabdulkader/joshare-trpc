@@ -34,8 +34,20 @@
       @apply text-2xl mb-3 font-bold
     }
 
-    .utility-option-header{
+    .container{
+      @apply text-start ml-5 mb-6 max-w-[450px] lg:break-inside-avoid
+    }
+
+    .container h1{
+      @apply text-2xl mb-3 font-bold
+    }
+
+    .container h2{
       @apply text-xl mb-2 font-medium
+    }
+
+    .container p, li{
+      @apply text-sm
     }
 
     .dot{
@@ -49,6 +61,10 @@
 
 .file_deleting {
   animation: deleting 0.3s ease-in-out;
+}
+
+.file_uploading{
+  animation: uploading 5s ease-in-out infinite;
 }
 
 @keyframes fadeIn {
@@ -70,5 +86,20 @@
   100% {
     opacity: 0;
     transform: translateX(6rem);
+  }
+}
+
+@keyframes uploading {
+  0% {
+    opacity: 0.6;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.8;
   }
 }
