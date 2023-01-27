@@ -34,7 +34,7 @@ export default function Header({ path }: { path: string }) {
                         (
                         <div className="flex flex-row items-center gap-3 lg:gap-6 pr-2">
                             <Countdown />
-                            <BsShare onClick={openSharePage} className="hover:text-red-400 cursor-pointer" />
+                            <BsShare onClick={openSharePage} className="hover:scale-110 cursor-pointer transition-all duration-300" />
                         </div>
                     )}
                 

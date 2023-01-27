@@ -23,9 +23,9 @@ export default function Ribbon(){
     return(
         <div className="w-full px-4 mb-5 top-[70vh]">
            <div className="w-full px-4 h-10 flex justify-between items-center rounded-lg bg-secondaryBg-light dark:bg-secondaryBg-dark">
-                <MdOutlineAttachEmail onClick={emailModal} className="cursor-pointer" />
-                <RiTimerFlashLine onClick={addTimeModal} className="cursor-pointer" />
-                <TiUserDeleteOutline onClick={removeUserModal} className="cursor-pointer" />
+                <MdOutlineAttachEmail onClick={emailModal} className="hover:scale-110 cursor-pointer transition-all duration-300" />
+                <RiTimerFlashLine onClick={addTimeModal} className="hover:scale-110 cursor-pointer transition-all duration-300" />
+                <TiUserDeleteOutline onClick={removeUserModal} className="hover:scale-110 cursor-pointer transition-all duration-300" />
            </div>
         </div>
     )

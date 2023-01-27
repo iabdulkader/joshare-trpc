@@ -5,12 +5,12 @@ export default function Guide() {
     return (
       <>
       <Head>
-        <title>Support | JoShare</title>
+        <title>Guide | JoShare</title>
       </Head>
 
       <Layout>
         <div className="h-full w-full text-center">
-          <div className="flex flex-col items-center"><h1 className="utility-header">Support <span className="dot">.</span></h1></div>
+          <div className="flex flex-col items-center"><h1 className="utility-header">Guide <span className="dot">.</span></h1></div>
 
           <div className="flex justify-center mb-6">
 
