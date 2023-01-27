@@ -52,12 +52,17 @@ export default function AddTime() {
 
     return (
        <div className="modal-container">
-            <div className="mb-2 text-center text-xs">
-                <p>Your files will be deleted autometically after 24 hours from creating your session. But You can extend this expiry time upto additional 24 hours. To add time select how many hours you want to extend and click Add Time.</p>
+            <div>
+                <h1 className="text-xl font-bold mb-3">Add Time</h1>
             </div>
 
+            <div className="mb-2 text-center text-xs">
+                <p>Your files will be deleted autometically after 24 hours from creating your session. But You can extend this expiry time upto additional 48 hours. To add time select how many hours you want to extend and click Add Time.</p>
+            </div>
+
+
             <div className="mb-4">
-                <p>Attempts Remaining {timeExtRemaining}</p>
+                <p className="text-base">Attempts Remaining <span className="dot">{timeExtRemaining}</span></p>
             </div>
 
             <div>

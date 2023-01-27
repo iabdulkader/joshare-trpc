@@ -68,7 +68,7 @@ export default function File({ file, auth = true }: { file: FileType, auth?: boo
 
                 {
                   "progress" in file ? (
-                    <p>{file.progress}</p>
+                    <p className='text-sm'>{file.progress}</p>
                   ) : (
                   <>
                     { auth && (<ButtonWithIcon loading={isLoading}>

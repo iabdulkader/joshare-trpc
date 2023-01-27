@@ -44,7 +44,11 @@ export default function SharePage() {
                <FiCopy onClick={copy} />
             </div>
 
-            <div className="flex justify-between gap-8 mt-5">
+            <div>
+              <h3 className="font-bold text-2xl mt-4 mb-2">Share <span className="dot">.</span></h3>
+            </div>
+
+            <div className="flex justify-between gap-8 mt-5 text-2xl">
               <div className="">
                 <a href={whatsAppLink} target="_blank" rel="noreferrer">
                     <AiOutlineWhatsApp />

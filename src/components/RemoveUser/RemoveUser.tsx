@@ -15,10 +15,13 @@ export default function RemoveUser() {
     return (
        <div className="modal-container text-center text-xs">
             <div>
-                <p>By clearing this session you will be able to upload files and share them with new PIN and also will be able to send another Email.
+                <h1 className="text-xl font-bold mb-3">Remove User</h1>
+            </div>
+
+            <div>
+                <p>By clearing this session you will be able to upload files and share them with new PIN and also will be able to send another Email.</p>
                 <br />
-                <br />
-                Although your current session&apos;s files won&apos;t get deleted before 24 hours unless you manually delete them while you are in that session. That means even after clearing this session your files can be downloaded with Share Link, QR Code or with PIN before they expires in 24 hours.</p>
+                <p>Although your current session&apos;s files won&apos;t get deleted before 24 hours unless you manually delete them while you are in that session. That means even after clearing this session your files can be downloaded with Share Link, QR Code or with PIN before they expires in 24 hours.</p>
             </div>
 
             <div className="mt-4">

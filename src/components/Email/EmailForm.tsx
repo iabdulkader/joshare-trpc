@@ -45,8 +45,12 @@ export default function EmailForm() {
 
     return (
         <form className="modal-container" onSubmit={send}>
+          <div>
+            <h1 className="text-xl font-bold mb-1">Send Email</h1>
+          </div>
+
           <div className="mb-2">
-            Emails Remained {emailRemaining}
+            <p className="text-xs">Attempts Remaining <span className="dot">{emailRemaining}</span></p>
           </div>
         
           <div className="w-full my-2 relative z-[0]">
