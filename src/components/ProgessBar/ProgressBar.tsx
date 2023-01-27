@@ -38,7 +38,7 @@ export default function ProgressBar({ file }: { file: FileType }) {
 
                  <div className='ml-3 flex-col flex justify-center h-full w-full flex-grow-1'>
                     <input 
-                    className="bg-transparent w-full text-sm border-none outline-none" 
+                    className="bg-transparent w-full text-xs border-none outline-none" 
                     type="text" 
                     name="" 
                     value={file.name} 
@@ -46,7 +46,7 @@ export default function ProgressBar({ file }: { file: FileType }) {
                     />
 
                     <input 
-                    className="bg-transparent w-full text-[10px] border-none outline-none font-light text-slate-600 dark:text-slate-300" 
+                    className="bg-transparent w-full text-[9px] border-none outline-none font-light text-slate-600 dark:text-slate-300" 
                     type="text" 
                     name="" 
                     value={file.size} 

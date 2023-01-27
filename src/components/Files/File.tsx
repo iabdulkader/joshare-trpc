@@ -43,13 +43,13 @@ export default function File({ file, auth = true }: { file: FileType, auth?: boo
         <div className={`file_animate mb-2 w-full flex justify-center transition-all duration-500 ${isDeleting ? 'file_deleting' : ''}`}>
             <div className={`w-full bg-secondaryBg-light dark:bg-secondaryBg-dark flex py-3 rounded-lg hover:bg-stone-300 hover:dark:bg-slate-700 duration-300 transition-all ${file.progress ? "file_uploading" : ""}`}>
 
-              <div className='ml-4 flex items-center h-[22px] w-[22px] my-auto'>
+              <div className='ml-4 flex items-center h-[20px] w-[20px] my-auto'>
                 <FileIcon extension={file.ext} {...iconStyles} key={file.id} />
               </div>
 
               <div className='flex-grow flex-col flex'>
                 <input 
-                  className="bg-transparent ml-3 text-sm border-none outline-none" 
+                  className="bg-transparent ml-3 text-xs border-none outline-none" 
                   type="text" 
                   name="" 
                   value={file.name} 
@@ -57,7 +57,7 @@ export default function File({ file, auth = true }: { file: FileType, auth?: boo
                 />
 
                 <input 
-                  className="bg-transparent w-full ml-3 text-[10px] border-none outline-none font-light text-slate-600 dark:text-slate-300" 
+                  className="bg-transparent w-full ml-3 text-[9px] border-none outline-none font-light text-slate-600 dark:text-slate-300" 
                   type="text" 
                   name="" 
                   value={file.size} 
