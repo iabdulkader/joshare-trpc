@@ -12,14 +12,31 @@
   }
 
 
+
+
+
   @layer components {
     .drag {
       @apply dark:bg-bg-dark bg-bg-light
     }
 
     .button{
-      @apply text-sm border border-bg-dark dark:border-bg-light rounded-md hover:bg-bg-dark hover:dark:bg-bg-light hover:text-slate-50 dark:hover:text-slate-900 transition-all duration-300 ease-in-out hover:scale-110
+      @apply  transition-all duration-300 ease-in-out 
     }
+
+    .button{
+      @apply text-sm relative border tracking-wider leading-none overflow-hidden hover:text-slate-50 dark:hover:text-slate-900 border-bg-dark dark:border-bg-light rounded-md transition-all duration-300 ease-in-out
+    }
+
+    .button .first_span{
+      @apply -translate-x-[101%] transition-transform duration-300 ease-in bg-bg-dark dark:bg-bg-light absolute inset-0
+    }
+
+    .button:hover span{
+      @apply -translate-x-0
+    }
+
+
 
     .modal-container{
       @apply bg-secondaryBg-light dark:bg-secondaryBg-dark w-full max-w-[400px] px-8 pb-12 pt-16 flex flex-col items-center rounded-lg shadow-lg text-sm
@@ -103,3 +120,6 @@
     opacity: 0.8;
   }
 }
+
+
+
