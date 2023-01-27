@@ -1,6 +1,7 @@
-import { decodeUser, getUser } from '../utlis/token/token';
+import { decodeUser } from '../utlis/token/token';
 import { NextApiRequest, NextApiResponse } from 'next'
 import { userModel } from '../models/users.model'
+import { supportModel } from "../models/support.model";
 import dbConnect from '../db/mongoose'
 import { User } from '../types'
 
@@ -20,7 +21,7 @@ export async function createContext({
   }
 
   await dbConnect();
-  return { req, res, userModel, user }
+  return { req, res, userModel, supportModel, user }
 }
 
 export type Context = ReturnType<typeof createContext>

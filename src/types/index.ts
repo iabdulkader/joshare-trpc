@@ -102,3 +102,11 @@ export type FilesAction =
     }
     
 
+
+// Support Type
+
+export interface SupportTypes {
+    name: string;
+    email: string;
+    message: string;
+}

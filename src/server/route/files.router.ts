@@ -1,4 +1,3 @@
-import { Path } from './../../types/index';
 import { privateProcedure } from './../createRouter';
 import { router } from "../createRouter";
 import { z } from 'zod';
