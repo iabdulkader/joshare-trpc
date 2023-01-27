@@ -40,7 +40,7 @@ export default function File({ file, auth = true }: { file: FileType, auth?: boo
 
 
     return(
-        <div className={`file_animate mb-2 w-full flex justify-center transition-all duration-500 ${isDeleting ? 'file_deleting' : ''}`}>
+        <div className={`font-sans file_animate mb-2 w-full flex justify-center transition-all duration-500 ${isDeleting ? 'file_deleting' : ''}`}>
             <div className={`w-full bg-secondaryBg-light dark:bg-secondaryBg-dark flex py-3 rounded-lg hover:bg-stone-300 hover:dark:bg-slate-700 duration-300 transition-all ${file.progress ? "file_uploading" : ""}`}>
 
               <div className='ml-4 flex items-center h-[20px] w-[20px] my-auto'>

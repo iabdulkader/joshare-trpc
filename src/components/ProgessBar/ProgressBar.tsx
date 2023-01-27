@@ -21,7 +21,7 @@ export default function ProgressBar({ file }: { file: FileType }) {
 
 
     return (
-       <div className="w-full px-4 pt-4 last:pb-4">
+       <div className="font-sans w-full px-4 pt-4 last:pb-4">
             <div className="border border-slate-400 dark:border-slate-500 rounded-lg h-14 relative overflow-hidden">
 
                <div 
@@ -32,7 +32,7 @@ export default function ProgressBar({ file }: { file: FileType }) {
                </div>
 
                <div className="absolute top-0 left-0 flex h-full w-full">
-                 <div className="h-[18px] w-[18px] my-auto ml-3">
+                 <div className="h-[18px] w-[20px] my-auto ml-3">
                  <FileIcon extension={file.ext} {...iconStyles} key={file.id} />
                  </div>
 
