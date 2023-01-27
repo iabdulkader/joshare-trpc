@@ -63,7 +63,7 @@ export default function CountDown() {
 
     return (
         <div>
-            <h4>
+            <h4 className="font-sans">
                 {hours}:{minutes}:{seconds}
             </h4>  
         </div>

@@ -81,8 +81,8 @@
   animation: deleting 0.3s ease-in-out;
 }
 
-.file_uploading{
-  animation: uploading 5s ease-in-out infinite;
+.file_uploading input, p{
+  animation: uploading 5s ease-in infinite;
 }
 
 @keyframes fadeIn {
@@ -111,14 +111,17 @@
   0% {
     opacity: 0.6;
   }
-  30% {
-    opacity: 0.8;
+  25% {
+    opacity: 0.85;
   }
-  75% {
+  50% {
     opacity: 0.6;
   }
+  75% {
+    opacity: 0.85;
+  }
   100% {
-    opacity: 0.8;
+    opacity: 0.6;
   }
 }
 
