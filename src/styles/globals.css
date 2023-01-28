@@ -62,7 +62,7 @@ input:-webkit-autofill:active {
     }
 
     .container{
-      @apply text-start ml-5 mb-6 max-w-[450px] lg:break-inside-avoid
+      @apply text-start mx-5 mb-6 max-w-[450px] lg:break-inside-avoid
     }
 
     .container h1{
@@ -73,7 +73,7 @@ input:-webkit-autofill:active {
       @apply text-xl mb-2 font-medium
     }
 
-    .container p, li{
+    .container p, .container li{
       @apply text-sm
     }
 
