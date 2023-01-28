@@ -10,28 +10,28 @@ export default function Footer() {
             <div className="my-auto flex justify-evenly w-full text-xs lg:text-base items-center relative">
 
                 <div className={`relative group ${path === "/about" ? 'active': ''}`} >
-                    <Link href="/about">
+                    <Link className="group-[.active]:font-bold group-[.active]:scale-105 transition-all duration-100" href="/about">
                         About
                     </Link>
                     <div className="absolute invisible group-[.active]:visible top-full h-1 w-1 bg-bg-dark dark:bg-bg-light left-[50%] translate-x-[-50%] rounded-[50%] mt-1" />
                 </div> 
 
                 <div className={`relative group ${path === "/terms" ? 'active': ''}`} >
-                    <Link href="/terms">
+                    <Link className="group-[.active]:font-bold group-[.active]:scale-105 transition-all duration-100" href="/terms">
                         Terms
                     </Link>
                     <div className="absolute invisible group-[.active]:visible top-full h-1 w-1 bg-bg-dark dark:bg-bg-light left-[50%] translate-x-[-50%] rounded-[50%] mt-1" />
                 </div> 
 
                 <div className={`relative group ${path === "/guide" ? 'active': ''}`} >
-                    <Link href="/guide">
+                    <Link className="group-[.active]:font-bold group-[.active]:scale-105 transition-all duration-100" href="/guide">
                         Guide
                     </Link>
                     <div className="absolute invisible group-[.active]:visible top-full h-1 w-1 bg-bg-dark dark:bg-bg-light left-[50%] translate-x-[-50%] rounded-[50%] mt-1" />
                 </div> 
 
                 <div className={`relative group ${path === "/support" ? 'active': ''}`} >
-                    <Link href="/support">
+                    <Link className="group-[.active]:font-bold group-[.active]:scale-105 transition-all duration-100" href="/support">
                         Support
                     </Link>
                     <div className="absolute invisible group-[.active]:visible top-full h-1 w-1 bg-bg-dark dark:bg-bg-light left-[50%] translate-x-[-50%] rounded-[50%] mt-1" />

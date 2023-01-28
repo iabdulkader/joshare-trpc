@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { trpc } from "../../utlis/trpc/trpc";
 import Button from "../Button/Button";
 
@@ -14,6 +15,8 @@ export default function SupportForm(){
 
     const { mutate, isLoading } = trpc.support.postMessage.useMutation({
         onSuccess: () => {
+            toast.success("Message sent successfully");
+            
             setName({ value: "", error: "" });
             setEmail({ value: "", error: "" });
             setMessage({ value: "", error: "" });
