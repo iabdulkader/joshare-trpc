@@ -21,6 +21,10 @@ module.exports = {
         fontFamily: {
           'poppins': ['Poppins', 'sans-serif'] 
         },
+        cardBg:{
+          light: "#e6e6e4",
+          dark: "#182238",
+        }
 
         
       }
