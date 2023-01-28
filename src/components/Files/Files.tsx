@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import { FallingLines } from "react-loader-spinner";
-import { FilesContext } from "../../context/filesContext/filesContext";
+import { useFilesContext } from "../../context/filesContext/filesContext";
 import File from "./File";
 import NoFile from "./NoFile";
 
 export default function Files({ auth = true }: { auth?: boolean }){
-    const { files } = useContext(FilesContext);
+    const { files } = useFilesContext();
 
     
     return(

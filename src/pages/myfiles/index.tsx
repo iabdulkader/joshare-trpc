@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Files from "../../components/Files/Files";
 import MetaHead from "../../components/Head/Head";
 import PinHolder from "../../components/PinHolder/PinHolder";
 import Ribbon from "../../components/Ribbon/Ribbon";
 import UploadBox from "../../components/Upload/UploadBox";
-import { FilesContext } from "../../context/filesContext/filesContext";
-import { UserContext } from "../../context/userContext/userContext";
+import { useFilesContext } from "../../context/filesContext/filesContext";
+import { useUserContext } from "../../context/userContext/userContext";
 import { getUser, removeUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 
@@ -19,8 +19,8 @@ export default function MyFiles(){
     trpc.home.isAlive.useQuery();
 
     const router = useRouter();
-    const { uploadFiles } = useContext(FilesContext);
-    const { rawStateUpdate, pin } = useContext(UserContext);
+    const { uploadFiles } = useFilesContext();
+    const { rawStateUpdate } = useUserContext();
 
     let user = useMemo(() => getUser(), []);
 

@@ -1,18 +1,17 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
-import UploadFiles from "../../components/Button/UploadFiles";
+import { useEffect } from "react";
 import Files from "../../components/Files/Files";
 import MetaHead from "../../components/Head/Head";
 import PinHolder from "../../components/PinHolder/PinHolder";
-import { FilesContext } from "../../context/filesContext/filesContext";
-import { UserContext } from "../../context/userContext/userContext";
+import { useFilesContext } from "../../context/filesContext/filesContext";
+import { useUserContext } from "../../context/userContext/userContext";
 import { getUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 
 export default function Pin(){
     const router = useRouter();
-    const { rawStateUpdate } = useContext(UserContext);
-    const { uploadFiles } = useContext(FilesContext);
+    const { rawStateUpdate } = useUserContext();
+    const { uploadFiles } = useFilesContext();
 
     const { pin } = router.query;
     const user = getUser();

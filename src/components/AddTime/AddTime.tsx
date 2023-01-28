@@ -1,14 +1,14 @@
 import { modal } from "modal-rt";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { UserContext } from "../../context/userContext/userContext";
+import { useUserContext } from "../../context/userContext/userContext";
 import { setUser } from "../../utlis/token/token";
 import { trpc } from "../../utlis/trpc/trpc";
 import Button from "../Button/Button"
 
 export default function AddTime() {
     const [hour, setHour] = useState<number>(0);
-    const { timeExtRemaining, pin, expire, rawStateUpdate } = useContext(UserContext);
+    const { timeExtRemaining, pin, expire, rawStateUpdate } = useUserContext();
     const options = [];
 
     const { mutate, isLoading } = trpc.user.extendTime.useMutation({

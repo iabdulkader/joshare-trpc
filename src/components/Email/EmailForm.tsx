@@ -1,7 +1,7 @@
 import modal from "modal-rt";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { UserContext } from "../../context/userContext/userContext";
+import { useUserContext } from "../../context/userContext/userContext";
 import { trpc } from "../../utlis/trpc/trpc";
 import Button from "../Button/Button";
 
@@ -9,7 +9,7 @@ export default function EmailForm() {
     const [from, setFrom] = useState<string>("");
     const [to, setTo] = useState<string>("");
 
-    const { emailRemaining, rawStateUpdate } = useContext(UserContext);
+    const { emailRemaining, rawStateUpdate } = useUserContext();
     const { mutate, isLoading } = trpc.user.sendEmail.useMutation({
         onSuccess: (data) => {
             toast.success("Email sent");

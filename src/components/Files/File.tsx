@@ -2,18 +2,18 @@ import { AiOutlineDownload, AiOutlineDelete } from 'react-icons/ai';
 import { FileIcon, defaultStyles } from 'react-file-icon';
 import { FileType } from '../../types';
 import { trpc } from '../../utlis/trpc/trpc';
-import { useContext, useState } from 'react';
-import { FilesContext } from '../../context/filesContext/filesContext';
+import { useState } from 'react';
+import { useFilesContext } from '../../context/filesContext/filesContext';
 import ButtonWithIcon from '../Button/ButtonWithIcon';
 import Link from 'next/link';
-import { UserContext } from '../../context/userContext/userContext';
-import { SocketContext } from '../../context/socketContext/SocketContext';
+import { useUserContext } from '../../context/userContext/userContext';
+import { useSocketContext } from '../../context/socketContext/SocketContext';
 
 export default function File({ file, auth = true }: { file: FileType, auth?: boolean}){
     const iconStyles = (defaultStyles as any)[file.ext || "docx"] || {};
-    const { deleteFileByID } = useContext(FilesContext);
-    const { pin } = useContext(UserContext);
-    const { socket } = useContext(SocketContext);
+    const { deleteFileByID } = useFilesContext();
+    const { pin } = useUserContext();
+    const { socket } = useSocketContext();
 
     const [isDeleting, setIsDeleting] = useState(false);
     

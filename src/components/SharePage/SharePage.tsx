@@ -6,11 +6,10 @@ import toast from "react-hot-toast";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { FaTelegramPlane } from "react-icons/fa";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext/userContext";
+import { useUserContext } from "../../context/userContext/userContext";
 
 export default function SharePage() {
-    const { pin } = useContext(UserContext);
+    const { pin } = useUserContext();
 
     const link = `${process.env.NEXT_PUBLIC_CLIENT_URL}/files/${pin}`;
     

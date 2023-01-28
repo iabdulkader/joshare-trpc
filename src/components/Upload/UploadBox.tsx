@@ -1,18 +1,18 @@
 import { useContext, useRef } from "react";
-import { FilesContext } from "../../context/filesContext/filesContext";
+import { useFilesContext } from "../../context/filesContext/filesContext";
 import { handleFiles } from "../../utlis/upload/handleFiles";
 import FileIcon from "../Icons/FileIcon"
 import { nanoid } from 'nanoid';
-import { UserContext } from "../../context/userContext/userContext";
+import { useUserContext } from "../../context/userContext/userContext";
 import { sizeModifier } from "../../utlis/upload/sizeModifier";
-import { SocketContext } from "../../context/socketContext/SocketContext";
+import { useSocketContext } from "../../context/socketContext/SocketContext";
 
 export default function UploadBox(){
     const fileRef = useRef<HTMLInputElement>(null);
     const dragRef = useRef<HTMLDivElement >(null);
-    const { addFilesToPending } = useContext(FilesContext);
-    const { pin } = useContext(UserContext);
-    const { socket } = useContext(SocketContext);
+    const { addFilesToPending } = useFilesContext();
+    const { pin } = useUserContext();
+    const { socket } = useSocketContext();
 
     const triggerFile = () => {
         if(fileRef.current){

@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { FilesReducer } from "./filesReducer";
 import { FileType, FilesActionType, FilesContextType, FilesType } from "../../types";
 import { useImmerReducer } from "use-immer";
@@ -8,6 +8,10 @@ const initialState: FilesContextType = {
 };
 
 export const FilesContext = createContext(initialState);
+
+export const useFilesContext = () => {
+    return useContext(FilesContext);
+};
 
 export default function FilesContextProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useImmerReducer(FilesReducer, initialState);

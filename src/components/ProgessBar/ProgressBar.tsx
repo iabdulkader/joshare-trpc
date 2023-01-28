@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { FileIcon, defaultStyles } from "react-file-icon";
-import { FilesContext } from "../../context/filesContext/filesContext";
+import { useFilesContext } from "../../context/filesContext/filesContext";
 import { FileType } from "../../types";
 
 export default function ProgressBar({ file }: { file: FileType }) {
     const iconStyles = (defaultStyles as any)[file.ext || "docx"] || {};
     let progress: number = file.progress! / 100;
 
-    const { removeFilesFromPending } = useContext(FilesContext);
+    const { removeFilesFromPending } = useFilesContext();
 
     const progressStyle: { transform: string } = {
         transform: `scaleX(${progress})`

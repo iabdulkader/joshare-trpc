@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
 import { io, Socket } from "socket.io-client";
-import { FilesContext } from "../filesContext/filesContext";
-import { UserContext } from "../userContext/userContext";
+import {  useFilesContext } from "../filesContext/filesContext";
+import { useUserContext } from "../userContext/userContext";
 
 type SocketContext = {
     socket: Socket | null;
@@ -13,10 +13,14 @@ let socketState: SocketContext = {
 
 export const SocketContext = createContext(socketState);
 
+export const useSocketContext = () => {
+    return useContext(SocketContext);
+}
+
 export default function SocketContextProvider({ children }: { children: React.ReactNode }) {
  
-    const { pin } = useContext(UserContext);
-    const { uploadFile, updateProgress, deleteFileByID } = useContext(FilesContext);
+    const { pin } = useUserContext();
+    const { uploadFile, updateProgress, deleteFileByID } = useFilesContext();
     
     
     useEffect(() => {

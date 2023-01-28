@@ -1,10 +1,9 @@
 import {FiCopy} from 'react-icons/fi';
 import toast from "react-hot-toast";
-import { UserContext } from '../../context/userContext/userContext';
-import { useContext } from 'react';
+import { useUserContext } from '../../context/userContext/userContext';
 
 export default function PinHolder(){
-    const { pin } = useContext(UserContext);
+    const { pin } = useUserContext();
 
     const copy = () => {
         navigator.clipboard.writeText(pin)

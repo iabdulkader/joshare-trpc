@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import UserReducer from "./userReducer";
 import { ActionType, User, UserKeys, UserValues } from "../../types";
 import { useImmerReducer } from "use-immer";
@@ -11,6 +11,10 @@ const initialState: User = {
 }
 
 export const UserContext = createContext(initialState);
+
+export const useUserContext = () => {
+  return useContext(UserContext);
+}
 
 export default function UserContextProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useImmerReducer(UserReducer, initialState);
