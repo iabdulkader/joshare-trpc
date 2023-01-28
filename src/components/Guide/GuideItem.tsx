@@ -9,7 +9,7 @@ export default function SupportItem({
     return (
         <div className="w-full flex justify-center items-center">
             <div>
-                <div className="p-4 flex justify-center items-center bg-cardBg-light dark:bg-cardBg-dark rounded-lg">
+                <div className="p-4 flex justify-center items-center bg-cardBg-light dark:bg-cardBg-dark rounded-lg transition-all duration-300">
                     <div className="rounded-lg overflow-hidden">
                         <Image className="scale-105" src={imageUrl} alt={image} />
                     </div>
