@@ -2,7 +2,7 @@ import { HTMLInputTypeAttribute } from "react";
 
 export type InputProps = {
     value: string;
-    error: string;
+    error?: string;
     label: string;
     type: HTMLInputTypeAttribute;
     onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
