@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
+import toast from "react-hot-toast";
 import { io, Socket } from "socket.io-client";
 import {  useFilesContext } from "../filesContext/filesContext";
 import { useUserContext } from "../userContext/userContext";
@@ -9,7 +10,7 @@ type SocketContext = {
 
 let socketState: SocketContext = {
     socket: io(`${process.env.NEXT_PUBLIC_WS_URL}`, { path: "/socket", transports : ['websocket'] }),
-}
+} as SocketContext;
 
 export const SocketContext = createContext(socketState);
 
@@ -20,7 +21,7 @@ export const useSocketContext = () => {
 export default function SocketContextProvider({ children }: { children: React.ReactNode }) {
  
     const { pin } = useUserContext();
-    const { uploadFile, updateProgress, deleteFileByID } = useFilesContext();
+    const { uploadFile, updateProgress, deleteFileByID, removeFilesFromPending } = useFilesContext();
     
     
     useEffect(() => {
@@ -35,6 +36,11 @@ export default function SocketContextProvider({ children }: { children: React.Re
 
         socket.on("upload-complete", (data) => {
             uploadFile!(data.file);
+        })
+
+        socket.on("cancel-upload", (data) => {
+            deleteFileByID!(data.id)
+            removeFilesFromPending!(data.id)
         })
         
         socket.on("delete-file", (data) => {

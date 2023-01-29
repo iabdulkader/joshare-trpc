@@ -1,11 +1,12 @@
+import { Socket } from 'socket.io-client';
 import axios from 'axios';
 import cookie from 'js-cookie';
 import { FileType } from '../../types';
 
 
-export const upload = async (file: FileType, socket: any, pin: string) => {
+export const upload = async (file: FileType, socket: Socket, pin: string) => {
     const formData = new FormData();
-    formData.append('file', file.file);
+    formData.append('file', file.file!);
     formData.append('fileId', file.id);
 
 
@@ -16,10 +17,8 @@ export const upload = async (file: FileType, socket: any, pin: string) => {
         headers: {
             "x-authorization": `Bearer ${cookie.get('token')}`,
         },
+        signal: file.cancelUpload!.signal,
         onUploadProgress: (p) => {
-
-
-                // socket.current!.emit("join", { pin });
 
                 socket.emit('upload-progress', {
                     pin,
@@ -34,12 +33,19 @@ export const upload = async (file: FileType, socket: any, pin: string) => {
                 })
             
 
-          }
+          },
     }).then (data => {
         socket.emit('upload-complete', {
             pin,
             file: data?.data?.data as FileType,
         })
+    })
+    .catch(err => {
+        if (axios.isCancel(err)) {
+            console.log('Request canceled', err.message);
+          } else {
+            console.log('Something went wrong: ', err.message);
+          }
     })
    
 };

@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { ChangeEvent, useContext, useRef } from "react";
 import { useFilesContext } from "../../context/filesContext/filesContext";
 import { handleFiles } from "../../utlis/upload/handleFiles";
 import FileIcon from "../Icons/FileIcon"
@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 import { useUserContext } from "../../context/userContext/userContext";
 import { sizeModifier } from "../../utlis/upload/sizeModifier";
 import { useSocketContext } from "../../context/socketContext/SocketContext";
+import { FilesType, FileType } from "../../types";
 
 export default function UploadBox(){
     const fileRef = useRef<HTMLInputElement>(null);
@@ -20,21 +21,21 @@ export default function UploadBox(){
         }
       }
 
-    const dragOver = (e: any) => {
+    const dragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         if (dragRef.current) {        
             dragRef.current.classList.add("drag");
         }
       }
     
-      const dragEnter = (e: any) => {
+      const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
           e.preventDefault();
           if (dragRef.current) {        
               dragRef.current.classList.add("drag");
           }
       }
       
-      const dragLeave = (e: any) => {
+      const dragLeave = (e: React.DragEvent<HTMLDivElement>) => {
           e.preventDefault();
           
           if (dragRef.current) {        
@@ -42,24 +43,28 @@ export default function UploadBox(){
           }
       }
 
-      const filesArray = (files: any) => {
-        let filesObj: any = {};
+      const filesArray = (files: HTMLInputElement["files"]) => {
+        let filesObj: FilesType = {};
 
-        for(let i = 0; i < files.length; i++){
+
+        for(let i = 0; i < files!.length; i++){
             let id = nanoid(5);
+            const controller = new AbortController();
+
             filesObj[id] = {
                 id: id,
-                file: files[i],
+                file: files![i],
                 progress: 0,
-                name: files[i].name,
-                size: sizeModifier(files[i].size),
-                ext: files[i].name.slice((Math.max(0, files[i].name.lastIndexOf(".")) || Infinity) + 1),
+                name: files![i].name,
+                size: sizeModifier(files![i].size),
+                ext: files![i].name.slice((Math.max(0, files![i].name.lastIndexOf(".")) || Infinity) + 1),
+                cancelUpload: controller,
             }
         }
         return filesObj;
       }
       
-      const fileDrop = (e: any) => {
+      const fileDrop = (e: React.DragEvent<HTMLDivElement>) => {
           e.preventDefault();
           if (dragRef.current) {        
             dragRef.current.classList.remove("drag");
@@ -68,14 +73,14 @@ export default function UploadBox(){
           
           addFilesToPending!(files);
 
-          handleFiles(files, socket, pin)
+          handleFiles(files, socket!, pin)
       }
 
-      const uploadFiles = (e: any) => {
+      const uploadFiles = (e: ChangeEvent<HTMLInputElement>) => {
         let files = filesArray(e.target.files)
         addFilesToPending!(files);
         
-        handleFiles(files, socket, pin)
+        handleFiles(files, socket!, pin)
       }
 
     return(

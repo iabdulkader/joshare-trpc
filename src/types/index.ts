@@ -27,7 +27,8 @@ export interface FileType {
     size: string;
     url?: string;
     progress?: number;
-    file?: any;
+    file?: File;
+    cancelUpload?: AbortController;
 }
 
 export type Action =
