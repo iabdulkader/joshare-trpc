@@ -1,13 +1,11 @@
-import Head from "next/head";
 import Link from "next/link";
+import MetaHead from "../../components/Head/Head";
 import Layout from "../../components/Layout/Layout";
 
 export default function Terms() {
     return (
       <>
-      <Head>
-        <title>Terms | JoShare</title>
-      </Head>
+      <MetaHead title="Terms | JoShare" />
 
       <Layout>
         <div className="h-full w-full text-center">

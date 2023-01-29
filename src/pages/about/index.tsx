@@ -1,15 +1,13 @@
-import Head from "next/head";
 import Link from "next/link";
 import { FiGithub, FiTwitter } from "react-icons/fi";
+import MetaHead from "../../components/Head/Head";
 import Layout from "../../components/Layout/Layout";
 
 
 export default function About() {
     return (
       <>
-        <Head>
-          <title>About | JoShare</title>
-        </Head>
+        <MetaHead title="About | JoShare" />
 
         <Layout>
           <div className="h-full w-full text-center">

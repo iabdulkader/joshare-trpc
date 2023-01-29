@@ -1,4 +1,4 @@
-import Head from "next/head";
+import MetaHead from "../../components/Head/Head";
 import Layout from "../../components/Layout/Layout";
 import Contact from "../../components/Support/Contact";
 import SupportForm from "../../components/Support/SupportForm";
@@ -6,9 +6,7 @@ import SupportForm from "../../components/Support/SupportForm";
 export default function Support() {
     return (
       <>
-      <Head>
-        <title>Support | JoShare</title>
-      </Head>
+      <MetaHead title="Support | JoShare" />
 
       <Layout>
         <div className="h-full w-full">

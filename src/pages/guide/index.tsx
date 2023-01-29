@@ -1,14 +1,12 @@
-import Head from "next/head";
 import GuideItem from "../../components/Guide/GuideItem";
+import MetaHead from "../../components/Head/Head";
 import Layout from "../../components/Layout/Layout";
 import { ADVANCED_GUIDE, BASIC_GUIDE } from "../../constants/guide";
 
 export default function Guide() {
     return (
       <>
-      <Head>
-        <title>Guide | JoShare</title>
-      </Head>
+      <MetaHead title="Guide | JoShare" />
 
       <Layout>
         <div className="h-full w-full text-center">
