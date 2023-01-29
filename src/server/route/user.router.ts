@@ -148,7 +148,7 @@ export const user = router({
                 expire,
                 timeExtRemaining
             }
-        } catch (error : any) {
+        } catch (error: any) {
             return {
                 success: false,
                 message: error.message

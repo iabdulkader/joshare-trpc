@@ -1,5 +1,5 @@
 import modal from "modal-rt";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { useUserContext } from "../../context/userContext/userContext";
 import { trpc } from "../../utlis/trpc/trpc";
@@ -22,7 +22,7 @@ export default function EmailForm() {
         }
     });
 
-    const send = (e: any) => {
+    const send = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if(emailRemaining === 0 || emailRemaining! < 0){

@@ -1,5 +1,8 @@
 import { FileIcon, defaultStyles } from "react-file-icon";
+import { AiOutlineDelete } from "react-icons/ai";
 import { useFilesContext } from "../../context/filesContext/filesContext";
+import { useSocketContext } from "../../context/socketContext/SocketContext";
+import { useUserContext } from "../../context/userContext/userContext";
 import { FileType } from "../../types";
 
 export default function ProgressBar({ file }: { file: FileType }) {
@@ -7,6 +10,8 @@ export default function ProgressBar({ file }: { file: FileType }) {
     let progress: number = file.progress! / 100;
 
     const { removeFilesFromPending } = useFilesContext();
+    const { pin } = useUserContext();
+    const { socket } = useSocketContext();
 
     const progressStyle: { transform: string } = {
         transform: `scaleX(${progress})`
@@ -16,6 +21,13 @@ export default function ProgressBar({ file }: { file: FileType }) {
         setTimeout(() => {
             removeFilesFromPending!(file.id)
         }, 1000)
+    }
+
+    const cancelUpload = () => {
+        if(progress === 1) return;
+        file.cancelUpload!.abort();
+        
+        socket?.emit("cancel-upload", { id: file.id, pin });
     }
 
 
@@ -52,8 +64,15 @@ export default function ProgressBar({ file }: { file: FileType }) {
                     readOnly />
                 </div>
 
-                <div className='flex items-center ml-3 mr-3 w-12'>
-                    <p className="text-xs ">{file.progress!} %</p>
+                <div className='flex items-center justify-end ml-3 mr-3 w-16'>
+                    <p className="text-xs flex gap-1 mr-2">{file.progress!} <span>%</span></p>
+
+                    <div className="text-lg w-6">
+                        <AiOutlineDelete
+                            className="cursor-pointer hover:scale-105 hover:font-bold transition-all duration-300" 
+                            onClick={cancelUpload}
+                        />
+                    </div> 
                 </div>
 
                 <div 

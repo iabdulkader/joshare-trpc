@@ -1,4 +1,4 @@
-import { FileType } from './../../types/index';
+import { FilesType, FileType } from './../../types/index';
 import { FilesAction, FilesActionType, FilesContextType } from "../../types";
 
 export function FilesReducer(draft: FilesContextType, action: FilesAction) {
@@ -8,7 +8,7 @@ export function FilesReducer(draft: FilesContextType, action: FilesAction) {
        if(action.payload){
           draft.files! = {
             ...draft.files,
-            ...action.payload!.reduce((acc: any, file: FileType) => {
+            ...action.payload!.reduce((acc: FilesType, file: FileType) => {
               acc[file.id] = file;
               return acc;
             }
