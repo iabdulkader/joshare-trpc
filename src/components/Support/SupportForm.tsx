@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { trpc } from "../../utlis/trpc/trpc";
 import Button from "../Button/Button";
+import Input from "../Input/Input";
 
 type SupportFormType = {
     value: string;
@@ -75,58 +76,30 @@ export default function SupportForm(){
             </div>
 
             <div className="mt-3 mb-8">
-                <div className="mb-0 relative z-[0]">
 
-                    <input 
-                    placeholder=" "
-                    value={name.value}
-                    onChange={(e) => setName({ error: "", value: e.target.value })}
+                <Input 
                     type="text" 
-                    id="name" 
-                    className={`w-full py-2 mb-1 outline-none text-slate-800  dark:text-slate-200 bg-transparent border-b focus:border-blue-500 ${name.error ? "border-red-600" : "border-gray-300"} appearance-none peer`}
-                    />
-                    <label 
-                    className="absolute left-0 text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    htmlFor="name"
-                    >Name</label>
+                    label="Name" 
+                    value={name.value} 
+                    error={name.error} 
+                    onChange={(e) => setName({ error: "", value: e.target.value })} 
+                />
 
-                    <p className="inset-0 my-0 text-xs text-red-600 dark:text-red-500">{name.error}</p>
-                </div>
-
-                <div className="my-2 relative z-[0]">
-
-                    <input 
-                    placeholder=" " 
+                <Input 
+                    type="text"
+                    label="Email"
                     value={email.value}
-                    onChange={(e) => setEmail({ error: "", value: e.target.value })}
-                    type="text" 
-                    id="email" 
-                    className={`w-full py-2 mb-1 outline-none text-slate-800  dark:text-slate-200 bg-transparent border-b focus:border-blue-500 ${email.error ? "border-red-600" : "border-gray-300"} appearance-none peer`}
-                    />
-                    <label 
-                    className="absolute left-0 text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    htmlFor="email"
-                    >Email</label>
+                    error={email.error}
+                    onChange={(e) => setEmail({ error: "", value: e.target.value })} 
+                />
 
-                    <p className="inset-0 my-0 text-xs text-red-600 dark:text-red-500">{email.error}</p>
-                </div>
-
-                <div className="my-2 relative z-[0]">
-
-                    <textarea 
-                    placeholder=" " 
+                <Input
+                    type="textarea"
+                    label="Message"
                     value={message.value}
-                    onChange={(e) => setMessage({ error: "", value:     e.target.value })}
-                    id="description" 
-                    className={`w-full py-2 mb-1 outline-none min-h-[10rem] text-slate-800  dark:text-slate-200 bg-transparent border-b focus:border-blue-500 ${message.error ? "border-red-600" : "border-gray-300"} appearance-none peer`}
-                    />
-                    <label 
-                    className="absolute left-0 text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                    htmlFor="description"
-                    >Description</label>
-
-                    <p className="inset-0 my-0 text-xs text-red-600 dark:text-red-500">{message.error}</p>
-                </div>
+                    error={message.error}
+                    onChange={(e) => setMessage({ error: "", value: e.target.value })}
+                />
 
 
                 <div className="mt-4 mb-10 flex justify-center">
