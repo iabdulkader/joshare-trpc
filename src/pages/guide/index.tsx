@@ -20,7 +20,7 @@ export default function Guide() {
     
                   {BASIC_GUIDE.map((item, index) => (
                     <div className="text-start ml-5 mb-6 max-w-[450px]">
-                      <GuideItem text={item.text} image={item.image} />
+                      <GuideItem text={item.text} image={item.image} id={item.id} />
                     </div>
                   ))}
 
@@ -36,7 +36,7 @@ export default function Guide() {
 
                     {ADVANCED_GUIDE.map((item, index) => (
                       <div className="text-start ml-5 mb-6 max-w-[450px]">
-                        <GuideItem text={item.text} image={item.image} />
+                        <GuideItem text={item.text} image={item.image} id={item.id} />
                       </div>
                     ))}
 

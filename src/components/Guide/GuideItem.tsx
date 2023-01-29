@@ -4,6 +4,7 @@ import { Guide } from "../../constants/guide"
 export default function SupportItem({
     text,
     image,
+    id
 }: Guide){
     const  imageUrl =  require(`../../assets/${image}`)
     return (
@@ -14,13 +15,19 @@ export default function SupportItem({
                         <Image className="scale-105" src={imageUrl} alt={image} />
                     </div>
                 </div>
-                <div className="text-sm mt-5 ml-2">
+                <div className="flex mt-5 items-start">
+
+                    <h1 className="text-xl mt-1 mr-1 h-full block">{id}.</h1>
+
+                    <div className="text-sm ml-2">
                     {
                         text.map((item, index) => (
                             <p key={index} className="text-sm mt-2">{item}</p>
                         ))
                     }
+                    </div>
                 </div>
+                
             </div>
         </div>
     )
