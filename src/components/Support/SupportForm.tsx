@@ -23,30 +23,45 @@ export default function SupportForm(){
         }
     });
 
+    const validate = () => {
+        let isValid = true;
 
-    const handleSubmit = () => {
         if(name.value === ""){
             setName({ ...name, error: "Name is required" });
-            return;
+            isValid = false;
         }
 
-        if(name.value.trim().length < 3){
+        if (name.value.trim().length < 3) {
             setName({ ...name, error: "Name must contain atleast 3 characters" });
-            return;
+            isValid = false;
         }
-        
 
         if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ig.test(email.value) === false){
             setEmail({ ...email, error: "Invalid email" });
-            return;
+            isValid = false;
         }
 
-        if(message.value.length < 15){
-            setMessage({ ...message, error: "Name must contain atleast 15 characters" });
-            return;
+        if (email.value === "") {
+            setEmail({ ...email, error: "Email is required" });
+            isValid = false;
         }
 
-        if(name.error === "" && email.error === "" && message.error === ""){
+        if (message.value === "") {
+            setMessage({ ...message, error: "Must contain atleast 15 characters." });
+            isValid = false;
+        }
+
+        if (message.value.length < 15 && message.value !== "") {
+            setMessage({ ...message, error: `Must contain atleast ${15 - message.value.length} more characters` });
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+
+    const handleSubmit = () => {
+        if(validate()){
             mutate({ name: name.value, email: email.value, message: message.value })
         }
     }
