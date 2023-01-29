@@ -17,7 +17,7 @@ export default function About() {
 
             <div className="flex justify-center mb-6">
 
-              <div className="columns-1 max-w-[1000px] lg:columns-2 gap-6 px-0 pr-5 lg:px-8">
+              <div className="columns-1 max-w-[1000px] lg:columns-2 gap-6 px-0 lg:px-8">
                 <div className="container">
                   <h1>What is joShare ?</h1>
                   <p>joShare is a micro file sharing platform. Now what do I mean by micro file sharing??</p>

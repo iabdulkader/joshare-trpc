@@ -62,7 +62,7 @@ input:-webkit-autofill:active {
     }
 
     .container{
-      @apply text-start mx-5 mb-6 max-w-[450px] lg:break-inside-avoid
+      @apply text-start mx-5 pr-5 mb-6 max-w-[450px] lg:break-inside-avoid
     }
 
     .container h1{
