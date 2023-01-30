@@ -51,32 +51,35 @@ export default function EmailForm() {
 
     return (
         <form className="modal-container" onSubmit={send}>
-          <div>
-            <h1 className="text-xl font-bold mb-1">Send Email</h1>
-          </div>
+          <div className="h-full overflow-y-auto flex flex-col items-center">
+            <div>
+              <h1 className="text-xl font-bold mb-1">Send Email</h1>
+            </div>
 
-          <div className="mb-2">
-            <p className="text-xs">Attempts Remaining <span className="dot">{emailRemaining}</span></p>
-          </div>
-        
-          <Input
-            value={from.value}
-            onChange={(e) => setFrom({ value: e.target.value, error: "" })}
-            label="From"
-            type="text"
-            error={from.error}
-          />
+            <div className="mb-2">
+              <p className="text-xs">Attempts Remaining <span className="dot">{emailRemaining}</span></p>
+            </div>
+          
+            <Input
+              value={from.value}
+              onChange={(e) => setFrom({ value: e.target.value, error: "" })}
+              label="From"
+              type="text"
+              error={from.error}
+            />
 
-          <Input
-            value={to.value}
-            onChange={(e) => setTo({ value: e.target.value, error: "" })}
-            label="To"
-            type="text"
-            error={to.error}
-          />
+            <Input
+              value={to.value}
+              onChange={(e) => setTo({ value: e.target.value, error: "" })}
+              label="To"
+              type="text"
+              error={to.error}
+            />
 
-          <div className="mt-4">
-            <Button text="Send" type="submit" loading={isLoading} width={24} height={8} />
+            <div className="mt-4">
+              <Button text="Send" type="submit" loading={isLoading} width={24} height={8} />
+            </div>
+
           </div>
 
         </form>
