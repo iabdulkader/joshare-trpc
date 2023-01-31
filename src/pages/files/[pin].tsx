@@ -24,7 +24,7 @@ export default function Pin(){
             }
         },
         onError: (error) => {
-            router.push("/");
+            router.push("/notfound");
         }
     })
 

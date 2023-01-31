@@ -1,11 +1,10 @@
-import { Socket } from "socket.io-client";
-
 export enum Path {
     home = "/",
     terms = "/terms",
     support = "/support",
     about = "/about",
-    guide = "/guide"
+    guide = "/guide",
+    notfound = "/404",
 }
 
 export interface User {
