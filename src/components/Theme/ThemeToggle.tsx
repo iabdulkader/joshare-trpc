@@ -1,16 +1,50 @@
 import styles from "./ThemeToggle.module.scss"
-import useTheme from "../../hooks/useTheme";
+import { useTheme } from "next-themes";
+import React, { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-    const { activeTheme, toggle } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
-    return(
-        <input 
-          id="toggle"  
-          onChange={toggle} 
-          className={styles.toggle} 
-          type="checkbox" 
-          checked={activeTheme === "dark" ? true : false}  
-        />
-    )
+  useEffect(() => {
+    setMounted(true);
+
+    if(localStorage.getItem("theme") === null){
+      setTheme("light");
+    };
+  }, []);
+
+  useEffect(() => {
+    let link = document.createElement('link');
+    link.rel = 'icon';
+
+    document.getElementsByTagName('head')[0].appendChild(link);
+    if(theme === "dark"){
+        link.href = "/favicon-dark.ico"
+    } else {
+        link.href = "/favicon.ico"
+    }
+    
+  }, [theme])
+
+  if (!mounted) {
+    return null;
+  }
+
+  const toggle = () => {
+    if (theme === "light") {
+      return setTheme("dark");
+    }
+    return setTheme("light");
+  }
+
+  return (
+    <input 
+      id="toggle"  
+      onChange={toggle} 
+      className={styles.toggle} 
+      type="checkbox" 
+      checked={theme === "dark" ? true : false}  
+    />
+  );
 }

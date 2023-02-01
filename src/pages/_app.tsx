@@ -13,6 +13,7 @@ import { trpc } from '../utlis/trpc/trpc'
 import UserContextProvider from '../context/userContext/userContext'
 import FilesContextProvider from '../context/filesContext/filesContext'
 import SocketContextProvider from '../context/socketContext/SocketContext'
+import { ThemeProvider } from 'next-themes'
 
 
 
@@ -36,16 +37,18 @@ function App({ Component, pageProps }: AppProps) {
       <UserContextProvider>
         <FilesContextProvider>
           <SocketContextProvider>
-          <Header path={router.pathname} />
+            <ThemeProvider attribute="class">
+              <Header path={router.pathname} />
 
-          { loading ?
-            <Loader /> :
-            <Component {...pageProps} />
-          }
-          
-          <Modal />
-          <Toaster />
-          <Footer />
+              { loading ?
+                <Loader /> :
+                <Component {...pageProps} />
+              }
+              
+              <Modal />
+              <Toaster />
+              <Footer />
+            </ThemeProvider>
           </SocketContextProvider>
         </FilesContextProvider>
       </UserContextProvider>
