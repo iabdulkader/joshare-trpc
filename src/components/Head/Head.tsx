@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import { useEffect } from 'react';
-import useTheme from '../../hooks/useTheme';
 
 export default function MetaHead({ title }: { title?: string}) {
     
