@@ -28,7 +28,7 @@ export default function ThemeToggle() {
   }, [theme])
 
   if (!mounted) {
-    return null;
+    return <div className="w-6 h-6"></div>;
   }
 
   const toggle = () => {
