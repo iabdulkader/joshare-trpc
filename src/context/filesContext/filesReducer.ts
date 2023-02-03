@@ -1,25 +1,23 @@
-import { FilesType, FileType } from './../../types/index';
+import { FilesType, FileType } from "./../../types/index";
 import { FilesAction, FilesActionType, FilesContextType } from "../../types";
 
 export function FilesReducer(draft: FilesContextType, action: FilesAction) {
-
   switch (action.type) {
-    case FilesActionType.UPLOAD_FILES:    
-       if(action.payload){
-          draft.files! = {
-            ...draft.files,
-            ...action.payload!.reduce((acc: FilesType, file: FileType) => {
-              acc[file.id] = file;
-              return acc;
-            }
-            , {})
-          }
-          
-          break;
+    case FilesActionType.UPLOAD_FILES:
+      if (action.payload) {
+        draft.files! = {
+          ...draft.files,
+          ...action.payload!.reduce((acc: FilesType, file: FileType) => {
+            acc[file.id] = file;
+            return acc;
+          }, {}),
+        };
+
+        break;
       } else {
         draft.files = action.payload;
       }
-       break;
+      break;
 
     case FilesActionType.UPLOAD_FILE:
       draft.files![action.payload.id] = action.payload;
@@ -33,19 +31,19 @@ export function FilesReducer(draft: FilesContextType, action: FilesAction) {
       draft.files! = {
         ...draft.files,
         ...action.payload,
-      }
+      };
       break;
 
     case FilesActionType.UPDATE_PROGRESS:
-      if(draft.files![action.id]){
+      if (draft.files![action.id]) {
         draft.files![action.id]!.progress = action.payload!.progress;
       } else {
-        draft.files![action.id] = action.payload
+        draft.files![action.id] = action.payload;
       }
       break;
 
     case FilesActionType.REMOVE_FILES_FROM_PENDING:
-      if(draft.files![action.payload]){
+      if (draft.files![action.payload]) {
         delete draft.files![action.payload].progress;
       }
       break;

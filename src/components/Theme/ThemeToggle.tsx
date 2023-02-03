@@ -1,4 +1,4 @@
-import styles from "./ThemeToggle.module.scss"
+import styles from "./ThemeToggle.module.scss";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 
@@ -9,23 +9,22 @@ export default function ThemeToggle() {
   useEffect(() => {
     setMounted(true);
 
-    if(localStorage.getItem("theme") === null){
+    if (localStorage.getItem("theme") === null) {
       setTheme("light");
-    };
+    }
   }, []);
 
   useEffect(() => {
-    let link = document.createElement('link');
-    link.rel = 'icon';
+    let link = document.createElement("link");
+    link.rel = "icon";
 
-    document.getElementsByTagName('head')[0].appendChild(link);
-    if(theme === "dark"){
-        link.href = "/favicon-dark.ico"
+    document.getElementsByTagName("head")[0].appendChild(link);
+    if (theme === "dark") {
+      link.href = "/favicon-dark.ico";
     } else {
-        link.href = "/favicon.ico"
+      link.href = "/favicon.ico";
     }
-    
-  }, [theme])
+  }, [theme]);
 
   if (!mounted) {
     return <div className="w-6 h-6"></div>;
@@ -36,15 +35,15 @@ export default function ThemeToggle() {
       return setTheme("dark");
     }
     return setTheme("light");
-  }
+  };
 
   return (
-    <input 
-      id="toggle"  
-      onChange={toggle} 
-      className={styles.toggle} 
-      type="checkbox" 
-      checked={theme === "dark" ? true : false}  
+    <input
+      id="toggle"
+      onChange={toggle}
+      className={styles.toggle}
+      type="checkbox"
+      checked={theme === "dark" ? true : false}
     />
   );
 }

@@ -2,14 +2,13 @@ import { Draft } from "immer";
 import { Action, ActionType, User } from "../../types";
 
 export default function UserReducer(draft: User, action: Action): void {
+  switch (action.type) {
+    case ActionType.RAW_UPDATE_STATE:
+      updateData(action.payload, draft, action.field);
 
-    switch (action.type) {
-        case ActionType.RAW_UPDATE_STATE:
-            updateData(action.payload, draft, action.field);
-
-        default:
-            break;
-        }
+    default:
+      break;
+  }
 }
 
 function updateData<
