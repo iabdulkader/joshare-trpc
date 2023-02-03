@@ -1,88 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
-    -webkit-transition-delay: 99999s;
+  -webkit-transition-delay: 99999s;
 }
 
-
 @layer base {
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .drag {
+    @apply dark:bg-bg-dark bg-bg-light;
   }
 
-
-
-
-
-  @layer components {
-    .drag {
-      @apply dark:bg-bg-dark bg-bg-light
-    }
-
-    .button{
-      @apply  transition-all duration-300 ease-in-out 
-    }
-
-    .button{
-      @apply text-sm relative border tracking-wider leading-none overflow-hidden hover:text-slate-50 dark:hover:text-slate-900 border-bg-dark dark:border-bg-light rounded-md transition-all duration-300 ease-in-out
-    }
-
-    .button .first_span{
-      @apply -translate-x-[101%] transition-transform duration-300 ease-in bg-bg-dark dark:bg-bg-light absolute inset-0
-    }
-
-    .button:hover span{
-      @apply -translate-x-0
-    }
-
-
-
-    .modal-container{
-      @apply bg-secondaryBg-light dark:bg-secondaryBg-dark w-full max-w-[400px] px-8 pb-12 pt-16 flex flex-col items-center rounded-lg shadow-lg text-sm
-    }
-
-
-
-    .utility-header{
-      @apply text-3xl mb-8 font-extrabold relative before:w-full before:h-[0.1rem] before:block before:bg-red-400 before:rounded before:mb-2 before:dark:bg-cyan-500 before:absolute before:top-10 before:left-0
-    }
-    .utility-sub-header{
-      @apply text-2xl mb-3 font-bold
-    }
-
-    .container{
-      @apply text-start mx-5 pr-5 mb-6 max-w-[450px] lg:break-inside-avoid
-    }
-
-    .container h1{
-      @apply text-2xl mb-3 font-bold
-    }
-
-    .container h2{
-      @apply text-xl mb-2 font-medium
-    }
-
-    .container p, .container li{
-      @apply text-sm
-    }
-
-    .dot{
-      @apply text-red-400 dark:text-cyan-500 font-extrabold
-    }
+  .button {
+    @apply transition-all duration-300 ease-in-out;
   }
 
-.file_animate{
+  .button {
+    @apply text-sm relative border tracking-wider leading-none overflow-hidden hover:text-slate-50 dark:hover:text-slate-900 border-bg-dark dark:border-bg-light rounded-md transition-all duration-300 ease-in-out;
+  }
+
+  .button .first_span {
+    @apply -translate-x-[101%] transition-transform duration-300 ease-in bg-bg-dark dark:bg-bg-light absolute inset-0;
+  }
+
+  .button:hover span {
+    @apply -translate-x-0;
+  }
+
+  .modal-container {
+    @apply bg-secondaryBg-light dark:bg-secondaryBg-dark w-full max-w-[400px] px-8 pb-12 pt-16 flex flex-col items-center rounded-lg shadow-lg text-sm;
+  }
+
+  .utility-header {
+    @apply text-3xl mb-8 font-extrabold relative before:w-full before:h-[0.1rem] before:block before:bg-red-400 before:rounded before:mb-2 before:dark:bg-cyan-500 before:absolute before:top-10 before:left-0;
+  }
+  .utility-sub-header {
+    @apply text-2xl mb-3 font-bold;
+  }
+
+  .container {
+    @apply text-start mx-5 pr-5 mb-6 max-w-[450px] lg:break-inside-avoid;
+  }
+
+  .container h1 {
+    @apply text-2xl mb-3 font-bold;
+  }
+
+  .container h2 {
+    @apply text-xl mb-2 font-medium;
+  }
+
+  .container p,
+  .container li {
+    @apply text-sm;
+  }
+
+  .dot {
+    @apply text-red-400 dark:text-cyan-500 font-extrabold;
+  }
+}
+
+.file_animate {
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -90,7 +81,8 @@ input:-webkit-autofill:active {
   animation: deleting 0.3s ease-in-out;
 }
 
-.file_uploading input, .file_uploading p{
+.file_uploading input,
+.file_uploading p {
   animation: uploading 5s ease-in infinite;
 }
 
@@ -133,6 +125,3 @@ input:-webkit-autofill:active {
     opacity: 0.6;
   }
 }
-
-
-

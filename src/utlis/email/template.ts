@@ -1,7 +1,13 @@
-export default function emailTemplate({ from, link, expire }: { from: string, link: string, expire: string }){
-
-    
-    return `
+export default function emailTemplate({
+  from,
+  link,
+  expire,
+}: {
+  from: string;
+  link: string;
+  expire: string;
+}) {
+  return `
     <!doctype html>
         <html>
         <head>

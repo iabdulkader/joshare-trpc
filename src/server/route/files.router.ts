@@ -1,49 +1,56 @@
-import { privateProcedure } from './../createRouter';
+import { privateProcedure } from "./../createRouter";
 import { router } from "../createRouter";
-import { z } from 'zod';
-import { TRPCError } from '@trpc/server';
-
+import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 
 export const files = router({
-    deleteFile: privateProcedure
-    .input(z.object({
+  deleteFile: privateProcedure
+    .input(
+      z.object({
         id: z.string(),
-        url: z.string()
-    }))
+        url: z.string(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
-        const { id, url } = input;
+      const { id, url } = input;
 
-        const file = await (await ctx).userModel.findOneAndUpdate({ pin: (await ctx).user?.pin }, {
-            $pull: {
-              files: { id: id },
-            }
-          }, { new: true })
+      const file = await (
+        await ctx
+      ).userModel.findOneAndUpdate(
+        { pin: (await ctx).user?.pin },
+        {
+          $pull: {
+            files: { id: id },
+          },
+        },
+        { new: true }
+      );
 
-        if(file){
+      if (file) {
+        let response = await fetch(
+          `${process.env.NEXT_PUBLIC_FILES_SERVER}/api/delete`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-authorization": `Bearer ${(await ctx).req.cookies.token}`,
+            },
+            body: JSON.stringify({
+              url,
+            }),
+          }
+        );
 
-            let response = await fetch(`${process.env.NEXT_PUBLIC_FILES_SERVER}/api/delete`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-authorization": `Bearer ${(await ctx).req.cookies.token}`
-                },
-                body: JSON.stringify({
-                    url
-                })
-            });
-
-
-            return {
-                success: true,
-                id,
-                message: "file deleted"
-            }
-        } else {
-            throw new TRPCError({
-                code: "NOT_FOUND",
-                message: "file not found"
-            })
-        }
+        return {
+          success: true,
+          id,
+          message: "file deleted",
+        };
+      } else {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "file not found",
+        });
+      }
     }),
-
 });

@@ -12,70 +12,69 @@ import { trpc } from "../../utlis/trpc/trpc";
 
 import ProgressBars from "../../components/ProgessBar/ProgressBars";
 
+export default function MyFiles() {
+  trpc.home.isAlive.useQuery();
 
+  const router = useRouter();
+  const { uploadFiles } = useFilesContext();
+  const { rawStateUpdate } = useUserContext();
 
+  let user = useMemo(() => getUser(), []);
 
-export default function MyFiles(){
-    trpc.home.isAlive.useQuery();
+  const { mutate } = trpc.user.getUser.useMutation({
+    onSuccess: (data) => {
+      rawStateUpdate!({
+        payload: data?.user?.emailRemaining!,
+        field: "emailRemaining",
+      });
+      rawStateUpdate!({
+        payload: data?.user?.timeExtRemaining!,
+        field: "timeExtRemaining",
+      });
+      rawStateUpdate!({
+        payload: new Date(data?.user?.expire!),
+        field: "expire",
+      });
 
-    const router = useRouter();
-    const { uploadFiles } = useFilesContext();
-    const { rawStateUpdate } = useUserContext();
+      uploadFiles!(data?.user?.files!);
+    },
+    onError: () => {
+      removeUser();
+      router.push("/");
+    },
+  });
 
-    let user = useMemo(() => getUser(), []);
+  useEffect(() => {
+    if (user === null) {
+      router.push("/");
+    }
 
-    const { mutate } = trpc.user.getUser.useMutation({
-        onSuccess: (data) => {
-            rawStateUpdate!({ payload: data?.user?.emailRemaining!, field: "emailRemaining" })
-            rawStateUpdate!({ payload: data?.user?.timeExtRemaining!, field: "timeExtRemaining" })
-            rawStateUpdate!({ payload: new Date(data?.user?.expire!), field: "expire" })
-    
+    if (user !== null && user.pin) {
+      rawStateUpdate!({ payload: user.pin, field: "pin" });
+      rawStateUpdate!({ payload: user.expire, field: "expire" });
+      mutate({ pin: user.pin });
+    }
 
-            uploadFiles!(data?.user?.files!);
-        }, 
-        onError: () => {
-            removeUser();
-            router.push("/");
-        }
-    });
-    
-    
-    useEffect(() => {
+    return () => uploadFiles!(null);
+  }, []);
 
-        if(user === null) {
-            router.push("/");
-        }
+  return (
+    <>
+      <MetaHead title="My Files | JoShare" />
 
-        if(user !== null && user.pin){
-            rawStateUpdate!({ payload: user.pin, field: "pin" });
-            rawStateUpdate!({ payload: user.expire, field: "expire" });
-            mutate({ pin: user.pin });
-        }
+      <div className="flex flex-col lg:flex-row lg:justify-center lg:gap-8 mt-16">
+        <div className="w-full max-w-[450px] h-full my-3 mx-auto lg:mx-0 lg:mt-6 lg:mb-20">
+          <PinHolder />
+          <Files />
+        </div>
 
-        return () => uploadFiles!(null);
-    }, [])
-    
-    return(
-        <>
-            <MetaHead title="My Files | JoShare" />
-            
-            <div className="flex flex-col lg:flex-row lg:justify-center lg:gap-8 mt-16">
-                <div className="w-full max-w-[450px] h-full my-3 mx-auto lg:mx-0 lg:mt-6 lg:mb-20">
-                    <PinHolder />
-                    <Files />
-                </div>
+        <div className="w-full max-w-[450px] h-full mx-auto lg:mx-0 lg:my-6 lg:mb-20">
+          <Ribbon />
+          <UploadBox />
 
-
-                <div className="w-full max-w-[450px] h-full mx-auto lg:mx-0 lg:my-6 lg:mb-20">
-                    <Ribbon />
-                    <UploadBox />
-
-                    <ProgressBars />
-                    
-                </div>
-
-                
-            </div>
-        </>       
-    )
+          <ProgressBars />
+        </div>
+      </div>
+    </>
+  );
 }
