@@ -1642,7 +1642,7 @@ cssesc@^3.0.0:
   resolved "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
-csstype@^3.0.2, csstype@^3.1.1:
+csstype@^3.0.2:
   version "3.1.1"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.1.tgz"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
@@ -2258,12 +2258,7 @@ globby@^11.0.3:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-goober-autoprefixer@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/goober-autoprefixer/-/goober-autoprefixer-1.2.3.tgz#72333478ddc8e0eab37f5d23e299c88c2f83c81d"
-  integrity sha512-89n8rlTrprAGewDnStDt5J9N0PBnyhYJReI0J/220ApeSJ8ufHJ64K2ycZCtI5X7u/JVlySyo1A2NL74HYmcBw==
-
-goober@^2.1.10, goober@^2.1.11:
+goober@^2.1.10:
   version "2.1.11"
   resolved "https://registry.npmjs.org/goober/-/goober-2.1.11.tgz"
   integrity sha512-5SS2lmxbhqH0u9ABEWq7WPU69a4i2pYcHeCxqaNq6Cw3mnrF0ghWNM4tEGid4dKy8XNIAUbuThuozDHHKJVh3A==
@@ -2739,14 +2734,10 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.7.tgz"
   integrity sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==
 
-modal-rt@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/modal-rt/-/modal-rt-0.9.0.tgz#167a7d9b6b0212b2229f917e4cf3734f47c025ac"
-  integrity sha512-BBcpKZLz+s9rBGctD2dzHUwMXXIuB+91P7YD6h+EM1q9BKz5Wc5k9pFvVH0xaGTkiBCtcuaiRJU8jafq02gnWg==
-  dependencies:
-    csstype "^3.1.1"
-    goober "^2.1.11"
-    goober-autoprefixer "^1.2.3"
+modal-rt@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/modal-rt/-/modal-rt-0.17.0.tgz#67730219ee5f484edc876e56e3196186a28efd36"
+  integrity sha512-d3fOSZWoXqyvnrFuT3FL6sY38iCPr90I+AYC0uSfzosHMi7dbqchgjG0dXdSkPA7jIxglrSWiCdmtvoMZ/4d+A==
 
 moment@^2.29.4:
   version "2.29.4"
