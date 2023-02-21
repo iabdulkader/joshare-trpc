@@ -8,7 +8,7 @@ import Layout from "../components/Layout/Layout";
 export default function Custom404() {
   return (
     <>
-      <MetaHead title="Not Found | File Sharing Solution" />
+      <MetaHead title="Not Found | JoShare" />
       <Layout>
         <div className="min-h-[calc(100vh-11rem)] flex flex-col justify-center items-center my-auto px-8 lg:px-0">
           <Image src={errorImg} alt="Error" />
