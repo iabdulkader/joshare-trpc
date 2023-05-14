@@ -25,7 +25,7 @@ export const support = router({
             },
             body: JSON.stringify({
               chat_id: process.env.TELEGRAM_CHAT_ID,
-              text: `<b>New Support Message Received</b>\n\n<b>Name: </b><b><code>${name}</code></b>\n<b>Email: </b><code>${email}</code>\n\n<b>Message: </b><code>${message}</code>`,
+              text: `<b>New Support Message Received</b>\n\n<b>Name: </b><b><code>${name}</code></b>\n<b>Email: </b><code>${email}</code>\n\n<b>Message:\n</b><code>${message}</code>`,
               parse_mode: "HTML",
             }),
           }
